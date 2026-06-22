@@ -310,8 +310,8 @@
                 role: 'volunteer',
                 deviceId: navigator.userAgent
               });
-              ApiClient.setToken(response.data.accessToken);
-              localStorage.setItem('foodRescueUser', JSON.stringify(response.data.user));
+              ApiClient.setToken(response.data?.tokens?.accessToken || response.data?.accessToken);
+              localStorage.setItem('foodRescueUser', JSON.stringify(response.data?.user || response.data));
               submitBtn.innerHTML = 'Registration Sent!';
               submitBtn.classList.replace('bg-primary', 'bg-tertiary');
               setTimeout(() => { window.location.href = '9_volunteer_dashboard.html'; }, 1500);
@@ -323,3 +323,4 @@
         });
     </script>
 <script src="map-picker.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var c=document.getElementById("vol-addr-container");if(c)c.innerHTML=buildAddressHTML("vol");initCountryDropdown("vol");initLiveTracking("fr-tracking-map");});</script><script src="nav.js"></script></body></html>
+

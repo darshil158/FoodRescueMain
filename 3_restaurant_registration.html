@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -279,8 +279,8 @@
         });
 
         // Step 2: Save JWT and user info
-        ApiClient.setToken(response.data.accessToken);
-        localStorage.setItem('foodRescueUser', JSON.stringify(response.data.user));
+        ApiClient.setToken(response.data?.tokens?.accessToken || response.data?.accessToken);
+        localStorage.setItem('foodRescueUser', JSON.stringify(response.data?.user || response.data));
 
         // Step 3: Save additional profile data to the restaurant collection
         await ApiClient.post('/restaurant/profile', {

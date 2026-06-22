@@ -50,4 +50,7 @@ module.exports = {
   sendUnauthorized,
   sendForbidden,
   sendBadRequest,
+  // Aliases used by controllers
+  successResponse: (res, statusCode, message, data) => sendSuccess(res, { statusCode, message, data }),
+  errorResponse: (res, statusCode, message) => sendError(res, { statusCode, message }),
 };

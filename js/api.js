@@ -15,8 +15,10 @@ class ApiClient {
 
     static clearSession() {
         localStorage.removeItem('foodRescueToken');
+        localStorage.removeItem('foodRescueRefreshToken');
         localStorage.removeItem('foodRescueUser');
-        window.location.href = '2_login.html';
+        localStorage.removeItem('fr_role');
+        window.location.href = '4_login_and_verification.html';
     }
 
     static async request(endpoint, options = {}) {
@@ -48,7 +50,7 @@ class ApiClient {
             }
 
             if (!response.ok) {
-                throw new Error(data.error || 'API Request Failed');
+                throw new Error(data.message || data.error || 'API Request Failed');
             }
 
             return data;

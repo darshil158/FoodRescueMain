@@ -8,6 +8,8 @@ class DonationService {
       ...donationData,
       restaurantId,
       status: 'AVAILABLE',
+      ngoId: null,
+      volunteerId: null,
       createdAt: new Date(),
       timestamps: { createdAt: new Date() }
     };
@@ -23,20 +25,31 @@ class DonationService {
 
   static async getActiveDonations(filters = {}) {
     let query = db.collection('donations');
-    
-    // Default to available unless specified
-    if (filters.status) query = query.where('status', '==', filters.status);
-    if (filters.restaurantId) query = query.where('restaurantId', '==', filters.restaurantId);
-    if (filters.ngoId) query = query.where('ngoId', '==', filters.ngoId);
-    
-    const snapshot = await query.orderBy('createdAt', 'desc').get();
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Apply single filter to avoid composite index requirement
+    if (filters.restaurantId) {
+      query = query.where('restaurantId', '==', filters.restaurantId);
+    } else if (filters.ngoId) {
+      query = query.where('ngoId', '==', filters.ngoId);
+    } else if (filters.status) {
+      query = query.where('status', '==', filters.status);
+    }
+
+    const snapshot = await query.get();
+    const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Sort in memory to avoid Firestore composite index requirement
+    return docs.sort((a, b) => {
+      const aTime = a.createdAt?.seconds || 0;
+      const bTime = b.createdAt?.seconds || 0;
+      return bTime - aTime;
+    });
   }
 
   static async claimDonation(donationId, ngoId) {
     const docRef = db.collection('donations').doc(donationId);
     const doc = await docRef.get();
-    
+
     if (!doc.exists) throw new Error('Donation not found');
     if (doc.data().status !== 'AVAILABLE') throw new Error('Donation is no longer available');
 
@@ -52,7 +65,7 @@ class DonationService {
   static async cancelDonation(donationId, restaurantId) {
     const docRef = db.collection('donations').doc(donationId);
     const doc = await docRef.get();
-    
+
     if (!doc.exists) throw new Error('Donation not found');
     if (doc.data().restaurantId !== restaurantId) throw new Error('Unauthorized');
     if (doc.data().status !== 'AVAILABLE') throw new Error('Can only cancel unassigned donations');
