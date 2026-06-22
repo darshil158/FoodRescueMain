@@ -231,111 +231,93 @@
 <script>
   const API = 'https://foodrescue-jhyr.onrender.com/api';
 
-  // ─── Toast notification ───────────────────────────────────
   function showToast(msg, type = 'success') {
     const t = document.createElement('div');
     t.textContent = msg;
-    t.style.cssText = `
-      position:fixed;top:20px;left:50%;transform:translateX(-50%);
-      background:${type==='error'?'#ba1a1a':'#006c49'};
-      color:#fff;padding:12px 24px;border-radius:999px;
-      font-family:Inter,sans-serif;font-size:14px;font-weight:600;
-      box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:99999;
-      transition:opacity 0.4s;`;
+    t.style.cssText = `position:fixed;top:20px;left:50%;transform:translateX(-50%);background:${type==='error'?'#ba1a1a':'#006c49'};color:#fff;padding:12px 24px;border-radius:999px;font-family:Inter,sans-serif;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:99999;transition:opacity 0.4s;`;
     document.body.appendChild(t);
     setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3500);
   }
 
-  // ─── Send OTP ────────────────────────────────────────
+  // Step 1: enter email -> show password panel
   async function sendOtp() {
     const email = document.getElementById('email-input').value.trim();
-    const btn = document.getElementById('send-otp-btn');
     if (!email) return showToast('Please enter your email address.', 'error');
-
-    btn.disabled = true;
-    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Sending...';
-
-    try {
-      const res = await fetch(`${API}/auth/login-otp/send`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Failed to send OTP');
-
-      showToast(`✅ OTP sent to ${email}! Check your inbox.`);
-      localStorage.setItem('fr_login_email', email);
-      showOtpOverlay();
-    } catch (e) {
-      showToast(e.message, 'error');
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = 'Send OTP <span class="material-symbols-outlined">send</span>';
-    }
+    localStorage.setItem('fr_login_email', email);
+    showToast('Enter your password in the boxes below.');
+    showOtpOverlay();
   }
 
-  // ─── Show OTP overlay ───────────────────────────────
   function showOtpOverlay() {
-    const loginSection = document.getElementById('login-section');
-    const otpSection = document.getElementById('otp-section');
-    loginSection.classList.add('blur-sm', 'opacity-50', 'pointer-events-none', 'scale-95');
-    otpSection.classList.remove('hidden');
-    setTimeout(() => { const f = document.querySelector('.otp-input'); if (f) f.focus(); }, 100);
+    document.getElementById('login-section').classList.add('blur-sm','opacity-50','pointer-events-none','scale-95');
+    const otpSec = document.getElementById('otp-section');
+    otpSec.classList.remove('hidden');
+    const hint = otpSec.querySelector('p');
+    if (hint) hint.textContent = 'Enter your password (one character per box)';
+    setTimeout(() => { const f = document.querySelector('.otp-input'); if(f) f.focus(); }, 100);
   }
 
   function hideOtpOverlay() {
-    const loginSection = document.getElementById('login-section');
-    const otpSection = document.getElementById('otp-section');
-    loginSection.classList.remove('blur-sm', 'opacity-50', 'pointer-events-none', 'scale-95');
-    otpSection.classList.add('hidden');
+    document.getElementById('login-section').classList.remove('blur-sm','opacity-50','pointer-events-none','scale-95');
+    document.getElementById('otp-section').classList.add('hidden');
   }
 
-  // OTP Input Auto-Tab
-  const inputs = document.querySelectorAll('#otp-inputs input');
-  inputs.forEach((input, index) => {
-    input.addEventListener('keyup', (e) => {
-      if (e.key >= 0 && e.key <= 9) { if (index < inputs.length - 1) inputs[index + 1].focus(); }
-      else if (e.key === 'Backspace') { if (index > 0) inputs[index - 1].focus(); }
+  // Make OTP boxes work as password input
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('#otp-inputs input');
+    inputs.forEach((input, index) => {
+      input.setAttribute('type', 'password');
+      input.addEventListener('input', () => {
+        if (input.value.length >= 1 && index < inputs.length - 1) inputs[index + 1].focus();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && index > 0) inputs[index - 1].focus();
+        if (e.key === 'Enter') handleVerify();
+      });
     });
   });
 
-  // ─── Verify OTP ────────────────────────────────────
+  // Step 2: collect password chars and login
   async function handleVerify() {
     const email = localStorage.getItem('fr_login_email');
-    const code = Array.from(inputs).map(i => i.value).join('');
-    const btn = event.currentTarget;
+    const inputs = document.querySelectorAll('#otp-inputs input');
+    const password = Array.from(inputs).map(i => i.value).join('');
+    const btn = document.querySelector('#otp-section button');
 
-    if (code.length < 6) return showToast('Please enter the full 6-digit OTP.', 'error');
-    if (!email) return showToast('Email not found. Please go back and enter your email.', 'error');
+    if (!email) return showToast('Please go back and enter your email first.', 'error');
+    if (!password) return showToast('Please enter your password in the boxes.', 'error');
 
-    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Verifying...';
+    btn.innerHTML = '<span class="material-symbols-outlined">sync</span> Signing in...';
     btn.disabled = true;
 
     try {
-      const res = await fetch(`${API}/auth/login-otp/verify`, {
+      const res = await fetch(`${API}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, code })
+        body: JSON.stringify({ email, password, deviceId: navigator.userAgent.substring(0,50) })
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Verification failed');
+      if (!res.ok) throw new Error(data.message || data.error || 'Login failed');
 
-      btn.classList.replace('bg-primary', 'bg-primary-container');
-      btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Verified!';
-      showToast('✅ Login successful! Redirecting...');
+      const tokens = data.data?.tokens || {};
+      const user   = data.data?.user   || {};
+      localStorage.setItem('foodRescueToken', tokens.accessToken || '');
+      localStorage.setItem('foodRescueRefreshToken', tokens.refreshToken || '');
+      localStorage.setItem('foodRescueUser', JSON.stringify(user));
+      localStorage.setItem('fr_role', user.role || 'restaurant');
 
-      // Navigate to dashboard based on saved role
-      const role = localStorage.getItem('fr_role') || 'restaurant';
+      btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Signed In!';
+      showToast('Login successful! Redirecting...');
+
       const dashboards = {
         restaurant: '7_restaurant_dashboard.html',
         ngo: '10_ngo_dashboard.html',
         volunteer: '9_volunteer_dashboard.html',
-        admin: '17_user_management_admin.html'
+        admin: '31_mission_control_dashboard.html'
       };
       setTimeout(() => {
         document.body.style.opacity = '0';
-        setTimeout(() => window.location.href = dashboards[role] || '7_restaurant_dashboard.html', 300);
+        setTimeout(() => { window.location.href = dashboards[user.role] || '7_restaurant_dashboard.html'; }, 300);
       }, 1000);
     } catch (e) {
       showToast(e.message, 'error');
@@ -343,7 +325,7 @@
       btn.disabled = false;
     }
   }
-</script>
-<script src="nav.js"></script></body></html>
+</script></body></html>
+
 
 
