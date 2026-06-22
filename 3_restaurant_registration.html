@@ -308,4 +308,17 @@
       el.addEventListener('blur', () => el.parentElement.querySelector('label')?.classList.remove('text-primary'));
     });
 </script>
-<script src="map-picker.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var c=document.getElementById("rest-addr-container");if(c){c.innerHTML=buildAddressHTML("rest");initCountryDropdown("rest");}});</script><script src="nav.js"></script></body></html>
+<script src="map-picker.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var c=document.getElementById("rest-addr-container");if(c){c.innerHTML=buildAddressHTML("rest");initCountryDropdown("rest");}});</script><script src="nav.js"></script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('button, a').forEach(el => {
+    const icon = el.querySelector('.material-symbols-outlined')?.textContent?.trim();
+    const text = el.textContent.trim().toLowerCase();
+    if (icon === 'arrow_back') { el.href='#'; el.onclick=(e)=>{e.preventDefault();window.location.href='2_role_selection.html';}; }
+    if (text.includes('sign in') || text.includes('already have') || text.includes('log in')) {
+      el.onclick=(e)=>{e.preventDefault();window.location.href='4_login_and_verification.html';};
+    }
+  });
+});
+</script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
+
+

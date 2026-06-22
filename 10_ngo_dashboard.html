@@ -394,4 +394,15 @@
     </script>
 
 
-<script src="js/api.js"></script><script src="js/dashboard.js"></script><script>document.addEventListener("DOMContentLoaded", () => { DashboardLoader.requireAuth() && DashboardLoader.loadNgo(); });</script><script src="nav.js"></script></body></html>
+<script src="js/api.js"></script><script src="js/dashboard.js"></script><script>document.addEventListener("DOMContentLoaded", () => { DashboardLoader.requireAuth() && DashboardLoader.loadNgo(); });</script><script src="nav.js"></script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  const navMap = { 'dashboard':'10_ngo_dashboard.html','history':'13_impact_analytics.html','add_circle':'8_create_food_donation.html','notifications':'11_notifications.html','person':'12_profile.html' };
+  document.querySelectorAll('nav a').forEach(el => { const icon = el.querySelector('.material-symbols-outlined')?.textContent?.trim(); if (navMap[icon]) { el.href='#'; el.onclick=(e)=>{e.preventDefault();window.location.href=navMap[icon];}; } });
+  document.querySelectorAll('header button').forEach(btn => { if (btn.querySelector('.material-symbols-outlined')?.textContent?.trim()==='notifications') btn.onclick=()=>window.location.href='11_notifications.html'; });
+  // Wire Claim Now buttons
+  document.querySelectorAll('button').forEach(btn => { if (btn.textContent.trim().toLowerCase().includes('claim')) btn.onclick = () => alert('Claiming donation... (connects to API)'); });
+  if (typeof DashboardLoader!=='undefined') DashboardLoader.requireAuth() && DashboardLoader.loadNgo();
+});
+</script><script src="js/api.js"></script><script src="js/dashboard.js"></script><script src="js/nav.js"></script></body></html>
+
+

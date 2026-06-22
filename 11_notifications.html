@@ -380,4 +380,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   } catch(e) { console.warn("Notifications:", e.message); }
 });
-</script><script src="nav.js"></script></body></html>
+</script><script src="nav.js"></script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('button, a').forEach(el => {
+    const icon = el.querySelector('.material-symbols-outlined')?.textContent?.trim();
+    if (icon === 'arrow_back') { el.href='#'; el.onclick=(e)=>{e.preventDefault();history.back();}; }
+  });
+});
+</script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
+
+

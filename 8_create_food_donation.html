@@ -381,4 +381,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-</script><script src="nav.js"></script></body></html>
+</script><script src="nav.js"></script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('button, a').forEach(el => {
+    const icon = el.querySelector('.material-symbols-outlined')?.textContent?.trim();
+    const text = el.textContent.trim().toLowerCase();
+    if (icon === 'arrow_back' || text === 'back') { el.href='#'; el.onclick=(e)=>{e.preventDefault();window.location.href='7_restaurant_dashboard.html';}; }
+  });
+});
+</script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
+
+

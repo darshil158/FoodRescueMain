@@ -501,4 +501,5 @@
             }, 10000);
         });
     </script>
-<script src="js/api.js"></script><script src="js/dashboard.js"></script><script>document.addEventListener("DOMContentLoaded", () => { if (!DashboardLoader.requireAuth()) return; ApiClient.get("/admin/security/system-status").then(d => { if (d && d.data) { const el = (id) => document.getElementById(id); if (el("stat-fraud")) el("stat-fraud").textContent = d.data.openFraudReports ?? 0; if (el("stat-banned")) el("stat-banned").textContent = d.data.totalBannedUsers ?? 0; } }).catch(e => console.warn(e)); });</script><script src="nav.js"></script></body></html>
+<script src="js/api.js"></script><script src="js/dashboard.js"></script><script>document.addEventListener("DOMContentLoaded", () => { if (!DashboardLoader.requireAuth()) return; ApiClient.get("/admin/security/system-status").then(d => { if (d && d.data) { const el = (id) => document.getElementById(id); if (el("stat-fraud")) el("stat-fraud").textContent = d.data.openFraudReports ?? 0; if (el("stat-banned")) el("stat-banned").textContent = d.data.totalBannedUsers ?? 0; } }).catch(e => console.warn(e)); });</script><script src="nav.js"></script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
+

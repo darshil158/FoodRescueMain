@@ -392,4 +392,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 });
-</script><script src="nav.js"></script></body></html>
+</script><script src="nav.js"></script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('button, a').forEach(el => {
+    const icon = el.querySelector('.material-symbols-outlined')?.textContent?.trim();
+    const text = el.textContent.trim().toLowerCase();
+    if (icon === 'arrow_back') { el.href='#'; el.onclick=(e)=>{e.preventDefault();history.back();}; }
+    if (icon === 'logout' || text.includes('logout') || text.includes('sign out')) {
+      el.onclick = () => { localStorage.clear(); window.location.href='1_splash_screen.html'; };
+    }
+  });
+});
+</script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
+
+
