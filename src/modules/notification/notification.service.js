@@ -187,21 +187,24 @@ const createBulkNotifications = async (recipients, { title, body, type, data = {
  * Get notifications for the current user (paginated)
  */
 const getMyNotifications = async (uid, queryParams) => {
-  const { limit, cursor } = getPaginationParams(queryParams);
-  const { unreadOnly } = queryParams;
-
-  let query = db.collection(COLLECTION)
+  // Single where() to avoid composite index — sort in memory
+  const snapshot = await db.collection(COLLECTION)
     .where('recipientId', '==', uid)
-    .orderBy('createdAt', 'desc');
+    .get();
 
-  if (unreadOnly === 'true') {
-    query = db.collection(COLLECTION)
-      .where('recipientId', '==', uid)
-      .where('isRead', '==', false)
-      .orderBy('createdAt', 'desc');
+  let docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  // Filter unread if requested
+  if (queryParams?.unreadOnly === 'true') {
+    docs = docs.filter(d => !d.isRead);
   }
 
-  return paginateQuery(query, { limit, cursor, collection: db.collection(COLLECTION) });
+  // Sort by createdAt descending in memory
+  docs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+
+  // Apply limit
+  const limit = parseInt(queryParams?.limit) || 20;
+  return { notifications: docs.slice(0, limit), total: docs.length };
 };
 
 /**
@@ -211,10 +214,8 @@ const getUnreadCount = async (uid) => {
   const snap = await db.collection(COLLECTION)
     .where('recipientId', '==', uid)
     .where('isRead', '==', false)
-    .count()
     .get();
-
-  return snap.data().count;
+  return snap.size;
 };
 
 /**
@@ -249,21 +250,19 @@ const markAsRead = async (uid, notificationId) => {
 const markAllAsRead = async (uid) => {
   const snapshot = await db.collection(COLLECTION)
     .where('recipientId', '==', uid)
-    .where('isRead', '==', false)
-    .limit(100)
     .get();
 
-  if (snapshot.empty) return { updated: 0 };
+  const unread = snapshot.docs.filter(d => !d.data().isRead);
+  if (unread.length === 0) return { updated: 0 };
 
   const batch = db.batch();
   const now = new Date();
-
-  snapshot.docs.forEach((doc) => {
+  unread.forEach((doc) => {
     batch.update(doc.ref, { isRead: true, readAt: now });
   });
 
   await batch.commit();
-  return { updated: snapshot.size };
+  return { updated: unread.length };
 };
 
 /**

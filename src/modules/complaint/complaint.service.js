@@ -15,8 +15,13 @@ class ComplaintService {
   }
 
   static async getUserComplaints(uid) {
-    const snapshot = await db.collection('complaints').where('filedBy', '==', uid).orderBy('createdAt', 'desc').get();
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // Single where() to avoid composite index requirement
+    const snapshot = await db.collection('complaints')
+      .where('filedBy', '==', uid)
+      .get();
+    const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // Sort in memory
+    return docs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
   }
 }
 module.exports = ComplaintService;
