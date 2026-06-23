@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Review &amp; Submit | Food Rescue Hero</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fdc656",
+                    "surface-container-highest": "#e1e3e2",
+                    "on-surface-variant": "#3e4942",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#f4be4e",
+                    "on-secondary-fixed": "#261900",
+                    "on-primary": "#ffffff",
+                    "secondary": "#7b5800",
+                    "tertiary": "#b7102a",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb3b1",
+                    "outline": "#6e7a72",
+                    "primary": "#006947",
+                    "on-secondary-container": "#735200",
+                    "outline-variant": "#bdcac0",
+                    "on-primary-fixed": "#002113",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1c",
+                    "surface-variant": "#e1e3e2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#006c49",
+                    "inverse-on-surface": "#eff1f0",
+                    "on-surface": "#191c1c",
+                    "inverse-surface": "#2e3131",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#92001c",
+                    "secondary-fixed": "#ffdea4",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#005236",
+                    "primary-container": "#00855b",
+                    "inverse-primary": "#72daa9",
+                    "tertiary-fixed": "#ffdad8",
+                    "surface-bright": "#f8faf9",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f8faf9",
+                    "surface-container": "#eceeed",
+                    "surface-container-low": "#f2f4f3",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#e6e9e8",
+                    "on-primary-container": "#f5fff6",
+                    "primary-fixed": "#8ef7c4",
+                    "surface-dim": "#d8dada",
+                    "primary-fixed-dim": "#72daa9",
+                    "tertiary-container": "#db313f",
+                    "surface": "#f8faf9",
+                    "on-tertiary-fixed": "#410007"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "lg": "48px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-completed { color: #006947; }
+        .step-active { color: #006947; font-weight: 700; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .custom-checkbox:checked {
+            background-color: #006947;
+            border-color: #006947;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- Top App Bar (Shared Component) -->
+<header class="bg-surface dark:bg-background shadow-sm dark:shadow-none flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed active:scale-95 duration-200 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-primary dark:text-primary-fixed font-bold font-label-md text-label-md cursor-pointer transition-opacity hover:opacity-90">Registration</span>
+<span class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md cursor-pointer transition-opacity hover:opacity-90">Help</span>
+<span class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md cursor-pointer transition-opacity hover:opacity-90">Contact</span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop mt-lg">
+<!-- Step Indicator -->
+<div class="mb-lg">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span class="text-primary font-label-md text-label-md uppercase tracking-wider">Step 5 of 5</span>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mt-1">Review &amp; Submit</h2>
+</div>
+<div class="text-right hidden sm:block">
+<span class="text-on-surface-variant font-body-md text-body-md">Completion</span>
+<div class="text-primary font-headline-md font-bold">100%</div>
+</div>
+</div>
+<!-- Impact Progress Bar -->
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full rounded-full"></div>
+</div>
+</div>
+<!-- Bento Grid Summary -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Account Info -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_4px_rgba(15,138,95,0.05)] border-t-4 border-secondary-container">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Account</h3>
+<button class="text-primary hover:bg-primary-container/10 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Full Name</p>
+<p class="font-body-md text-body-md text-on-surface">Sarah Jenkins</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Email</p>
+<p class="font-body-md text-body-md text-on-surface">sarah.j@greenplate.com</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Role</p>
+<p class="font-body-md text-body-md text-on-surface">Operations Manager</p>
+</div>
+</div>
+</div>
+<!-- Restaurant Details -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_4px_rgba(15,138,95,0.05)] relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined !text-[120px] text-primary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Restaurant Info</h3>
+<button class="text-primary hover:bg-primary-container/10 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="space-y-3">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Business Name</p>
+<p class="font-body-md text-body-md text-on-surface">Green Plate Bistro</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Cuisine Type</p>
+<p class="font-body-md text-body-md text-on-surface">Farm-to-Table, Mediterranean</p>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Estimated Surplus</p>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary/10 text-primary">
+                                20-30 lbs / week
+                            </span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase">Operating Hours</p>
+<p class="font-body-md text-body-md text-on-surface">09:00 AM - 11:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Food Safety & Inventory -->
+<div class="md:col-span-7 bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_4px_rgba(15,138,95,0.05)]">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Food &amp; Handling</h3>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<button class="text-primary hover:bg-primary-container/10 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-3 bg-surface rounded-lg border border-outline-variant">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-2 uppercase">Rescue Categories</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-highest rounded text-label-sm font-label-sm">Produce</span>
+<span class="px-2 py-1 bg-surface-container-highest rounded text-label-sm font-label-sm">Bakery</span>
+<span class="px-2 py-1 bg-surface-container-highest rounded text-label-sm font-label-sm">Prepared Meals</span>
+</div>
+</div>
+<div class="p-3 bg-surface rounded-lg border border-outline-variant">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-2 uppercase">Storage Method</p>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary">ac_unit</span>
+<span class="font-body-md text-body-md">Cold Storage Certified</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Address & Map -->
+<div class="md:col-span-5 bg-surface-container-lowest rounded-xl shadow-[0_2px_4px_rgba(15,138,95,0.05)] overflow-hidden flex flex-col">
+<div class="p-md flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Pickup Location</h3>
+<button class="text-primary hover:bg-primary-container/10 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">123 Sustainability Way, Green District, Eco City, 90210</p>
+</div>
+<div class="h-32 w-full relative">
+<div class="absolute inset-0 bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover grayscale opacity-60" data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuART_2XUYxcH-p5W1hFOExMb4R3GqiiCkxrBDgpni6yFXeJP8ZxJ8eEMVU2z127u7OMVR184QAmjHPafBgFMNdBHEOMqRlnfWk65cgjf5rLI503bU31aexnsfNXBekURGZf0TvmbAqDV9rNRnnr_uJNJ9RS4gEnRHG1k-kCheXFpdrNWv47rwZh8w-TYQ1TaBwlDFC1QDCAWov0YIdKOx5-ZFWA07KfBF9QAp9KOI4-kw4frN56cAy6dgCdCRJQiDOjr02ezLyMh6A"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined text-primary !text-4xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Documents -->
+<div class="md:col-span-12 bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_4px_rgba(15,138,95,0.05)]">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Uploaded Documents</h3>
+<button class="text-primary hover:bg-primary-container/10 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-md">
+<div class="flex items-center gap-3 p-3 bg-surface rounded-xl border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<div class="w-10 h-10 bg-primary/10 rounded flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Business_License.pdf</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">2.4 MB • Verified</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface rounded-xl border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<div class="w-10 h-10 bg-primary/10 rounded flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Health_Permit_2024.pdf</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">1.1 MB • Verified</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Consents -->
+<section class="mt-lg mb-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Consents &amp; Declarations</h3>
+<div class="space-y-4">
+<label class="flex items-start gap-4 p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+<div class="pt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary custom-checkbox transition-all" type="checkbox"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Data Accuracy Certification</p>
+<p class="font-body-md text-body-md text-on-surface-variant">I certify that all information provided in this registration form is accurate, complete, and up-to-date to the best of my knowledge.</p>
+</div>
+</label>
+<label class="flex items-start gap-4 p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+<div class="pt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary custom-checkbox transition-all" type="checkbox"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Food Safety Compliance</p>
+<p class="font-body-md text-body-md text-on-surface-variant">I agree to maintain all local and national food safety standards for all rescued food items until they are collected by a verified courier.</p>
+</div>
+</label>
+<label class="flex items-start gap-4 p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+<div class="pt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary custom-checkbox transition-all" type="checkbox"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Terms &amp; Conditions</p>
+<p class="font-body-md text-body-md text-on-surface-variant">I have read and agree to the Food Rescue Hero Partner Terms of Service and the Good Samaritan Food Donation Act protections.</p>
+</div>
+</label>
+<label class="flex items-start gap-4 p-4 bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+<div class="pt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary custom-checkbox transition-all" type="checkbox"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Privacy Policy</p>
+<p class="font-body-md text-body-md text-on-surface-variant">I acknowledge that my business data will be handled in accordance with the Food Rescue Hero Privacy Policy for logistics and impact reporting.</p>
+</div>
+</label>
+</div>
+</section>
+<!-- Submit Action -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-md p-md bg-primary-container text-on-primary-container rounded-2xl mb-xl">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Almost there!</h4>
+<p class="font-body-md text-body-md opacity-90">Our team typically reviews applications within 24-48 hours.</p>
+</div>
+</div>
+<button class="w-full md:w-auto px-xl py-md bg-white text-primary font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all active:scale-95 text-headline-md" id="submitBtn">
+                Submit for Verification
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Shared Component - Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm text-label-sm">Contact</span>
+</a>
+</nav>
+<script>
+        document.getElementById('submitBtn').addEventListener('click', async function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const allChecked = Array.from(checkboxes).every(c => c.checked);
+            
+            if (allChecked) {
+                this.innerHTML = '<span class="flex items-center gap-2"><svg class="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...</span>';
+                
+                try {
+                    let regData = JSON.parse(localStorage.getItem('restaurant_reg_data') || '{}');
+                    regData.status = 'PENDING';
+
+                    await ApiClient.post('/restaurant/profile', regData);
+                    
+                    localStorage.removeItem('restaurant_reg_data');
+                    window.location.href = '6_Registration_Success_Status.html';
+                } catch(error) {
+                    alert("Submission failed: " + error.message);
+                    this.innerText = 'Submit for Verification';
+                }
+            } else {
+                alert('Please accept all consents before submitting.');
+                checkboxes.forEach(c => {
+                    if(!c.checked) {
+                        c.parentElement.parentElement.classList.add('ring-2', 'ring-error/50');
+                        setTimeout(() => c.parentElement.parentElement.classList.remove('ring-2', 'ring-error/50'), 2000);
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="js/api.js"></script>
+</body></html>

@@ -29,43 +29,52 @@ service cloud.firestore {
       return isAuthenticated() && getUserData().isSuspended == false;
     }
 
+    function isSafeUserUpdate() {
+      let affected = request.resource.data.diff(resource.data).affectedKeys();
+      let forbidden = ['role', 'status', 'isSuspended', 'isTwoFactorEnabled', 'adminSecretCode', 'isEmailVerified', 'passwordHash', 'twoFactorSecret'];
+      return !affected.hasAny(forbidden);
+    }
+
     // ── Users collection ─────────────────────────────────────────────────────
     match /users/{userId} {
       allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
       allow create: if isAuthenticated() && isOwner(userId);
-      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow update: if isAuthenticated() && (isAdmin() || (isOwner(userId) && isSafeUserUpdate()));
       allow delete: if isAdmin();
     }
 
     // ── Restaurants collection ───────────────────────────────────────────────
     match /restaurants/{restaurantId} {
       allow read: if isAuthenticated();
-      allow create: if hasRole('restaurant') && isOwner(restaurantId);
-      allow update: if (hasRole('restaurant') && isOwner(restaurantId)) || isAdmin();
+      allow create: if hasRole('restaurant') && isOwner(restaurantId) && request.resource.data.uid == request.auth.uid;
+      allow update: if isAdmin() || (hasRole('restaurant') && isOwner(restaurantId) && request.resource.data.uid == request.auth.uid);
       allow delete: if isAdmin();
     }
 
     // ── NGOs collection ──────────────────────────────────────────────────────
     match /ngos/{ngoId} {
       allow read: if isAuthenticated();
-      allow create: if hasRole('ngo') && isOwner(ngoId);
-      allow update: if (hasRole('ngo') && isOwner(ngoId)) || isAdmin();
+      allow create: if hasRole('ngo') && isOwner(ngoId) && request.resource.data.uid == request.auth.uid;
+      allow update: if isAdmin() || (hasRole('ngo') && isOwner(ngoId) && request.resource.data.uid == request.auth.uid);
       allow delete: if isAdmin();
     }
 
     // ── Volunteers collection ────────────────────────────────────────────────
     match /volunteers/{volunteerId} {
       allow read: if isAuthenticated();
-      allow create: if hasRole('volunteer') && isOwner(volunteerId);
-      allow update: if (hasRole('volunteer') && isOwner(volunteerId)) || isAdmin();
+      allow create: if hasRole('volunteer') && isOwner(volunteerId) && request.resource.data.uid == request.auth.uid;
+      allow update: if isAdmin() || (hasRole('volunteer') && isOwner(volunteerId) && request.resource.data.uid == request.auth.uid);
       allow delete: if isAdmin();
     }
 
     // ── Donations collection ─────────────────────────────────────────────────
     match /donations/{donationId} {
       allow read: if isAuthenticated();
-      allow create: if hasRole('restaurant') && isNotSuspended();
-      allow update: if isAuthenticated() && isNotSuspended();
+      // Creation allowed if it's the restaurant's own donation
+      allow create: if hasRole('restaurant') && isNotSuspended() && request.resource.data.restaurantId == request.auth.uid;
+      // Completely block Client SDK updates to prevent Horizontal Privilege Escalation.
+      // All claims and cancellations must be routed through the Node.js API.
+      allow update: if false; 
       allow delete: if isAdmin();
     }
 
@@ -79,9 +88,10 @@ service cloud.firestore {
     match /notifications/{notificationId} {
       allow read: if isAuthenticated() &&
         resource.data.recipientId == request.auth.uid;
-      allow create: if isAuthenticated(); // Backend creates via Admin SDK anyway
+      allow create: if false; // Backend Admin SDK only
       allow update: if isAuthenticated() &&
-        resource.data.recipientId == request.auth.uid;
+        resource.data.recipientId == request.auth.uid &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']);
       allow delete: if isAdmin();
     }
 

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NGO Registration - Food Rescue Hero</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f8faf9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#db313f",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8faf9",
+                        "inverse-on-surface": "#eff1f0",
+                        "surface-container": "#eceeed",
+                        "outline": "#6e7a72",
+                        "tertiary": "#b7102a",
+                        "on-tertiary-fixed": "#410007",
+                        "secondary": "#7b5800",
+                        "primary-container": "#00855b",
+                        "primary": "#006947",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#5d4200",
+                        "inverse-primary": "#72daa9",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#92001c",
+                        "tertiary-fixed": "#ffdad8",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#735200",
+                        "surface-dim": "#d8dada",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-high": "#e6e9e8",
+                        "secondary-container": "#fdc656",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2e3131",
+                        "tertiary-fixed-dim": "#ffb3b1",
+                        "background": "#f8faf9",
+                        "secondary-fixed-dim": "#f4be4e",
+                        "surface-tint": "#006c49",
+                        "primary-fixed-dim": "#72daa9",
+                        "on-primary-container": "#f5fff6",
+                        "surface-variant": "#e1e3e2",
+                        "primary-fixed": "#8ef7c4",
+                        "on-surface": "#191c1c",
+                        "outline-variant": "#bdcac0",
+                        "surface-container-highest": "#e1e3e2",
+                        "on-secondary-fixed": "#261900",
+                        "secondary-fixed": "#ffdea4",
+                        "surface-container-low": "#f2f4f3",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3e4942",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "xs": "4px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { background-color: #006947; color: white; }
+        .step-inactive { background-color: #e1e3e2; color: #3e4942; }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(15, 138, 95, 0.05); }
+        .input-glow:focus { box-shadow: 0 0 0 4px rgba(0, 105, 71, 0.1); border-color: #006947; }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #006947;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-background shadow-sm dark:shadow-none docked full-width top-0 z-40 sticky">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base">
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed active:scale-95 duration-200 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md hover:opacity-90 transition-opacity" href="#">Help</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md hover:opacity-90 transition-opacity" href="#">Contact</a>
+</div>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- Stepper -->
+<div class="mb-xl">
+<div class="flex items-center justify-between relative">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-variant -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-0" style="width: 50%;"></div>
+<!-- Steps -->
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white font-bold">1</div>
+<span class="font-label-sm text-on-surface-variant hidden md:block">Identity</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white font-bold">2</div>
+<span class="font-label-sm text-on-surface-variant hidden md:block">Legal</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white font-bold ring-4 ring-primary-container/30">3</div>
+<span class="font-label-sm text-primary font-bold hidden md:block">Location</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-variant text-on-surface-variant font-bold">4</div>
+<span class="font-label-sm text-on-surface-variant hidden md:block">Assets</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-variant text-on-surface-variant font-bold">5</div>
+<span class="font-label-sm text-on-surface-variant hidden md:block">Confirm</span>
+</div>
+</div>
+<div class="mt-sm text-center md:hidden">
+<p class="font-label-md text-primary uppercase tracking-wider">Step 3 of 5: Location &amp; Operations</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Address & Map -->
+<div class="lg:col-span-7 space-y-gutter">
+<section class="bg-surface-container-lowest rounded-xl p-md ambient-shadow">
+<div class="flex items-center gap-2 mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<h2 class="font-headline-md text-on-surface">Base Address</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div class="md:col-span-2">
+<label class="block font-label-md text-on-surface-variant mb-xs">Address Line 1</label>
+<input id="addressLine1" class="w-full bg-surface-bright border-outline-variant rounded-lg p-3 outline-none transition-all input-glow font-body-md" placeholder="Street number, building name" type="text"/>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-md text-on-surface-variant mb-xs">Address Line 2 (Optional)</label>
+<input id="addressLine2" class="w-full bg-surface-bright border-outline-variant rounded-lg p-3 outline-none transition-all input-glow font-body-md" placeholder="Apartment, suite, unit" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-xs">City</label>
+<input id="city" class="w-full bg-surface-bright border-outline-variant rounded-lg p-3 outline-none transition-all input-glow font-body-md" placeholder="Enter city" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-xs">State / Province</label>
+<input id="state" class="w-full bg-surface-bright border-outline-variant rounded-lg p-3 outline-none transition-all input-glow font-body-md" placeholder="Enter state" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-xs">Pincode / ZIP</label>
+<input id="pincode" class="w-full bg-surface-bright border-outline-variant rounded-lg p-3 outline-none transition-all input-glow font-body-md" placeholder="6-digit code" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-xs">Emergency Contact</label>
+<input id="emergencyContact" class="w-full bg-surface-bright border-outline-variant rounded-lg p-3 outline-none transition-all input-glow font-body-md" placeholder="+1 234 567 890" type="tel"/>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl p-md ambient-shadow overflow-hidden">
+<div class="flex justify-between items-center mb-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+<h2 class="font-headline-md text-on-surface">Interactive Map</h2>
+</div>
+<button class="flex items-center gap-1 text-primary font-label-md hover:bg-primary-container/10 px-3 py-1 rounded-full transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="my_location">my_location</span>
+                            Use Current Location
+                        </button>
+</div>
+<div class="relative h-64 rounded-lg bg-surface-variant overflow-hidden group">
+<div class="w-full h-full" data-alt="A clean, minimalist vector map of a metropolitan city area with soft green and grey tones, reflecting a modern light-mode NGO dashboard. A single green location pin is placed in the center, casting a soft shadow on the map surface, symbolizing precise operational targeting." data-location="San Francisco" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7XEKp8-RGH4aTk1H9LSxoXuRVji5eDhRBDDaR69QfWSk5_TSy6TxN-q5O1AlkGmwJWDNObO3Jl4qRgdd1nz0QbD3ySyLiMX1lB5rYooYO6zHOV-1LS_IKUwKygV_CTzjXl8cg_S_IpNcRuGxzfn9y0y2Qft86nRv2HomGKs52osnO0t8gN-l2JdnYyZFggD8kEsoKqfALkTrWReEQKXKq3gib0n4VYRxOISRTKuz8-2w4fPD65J9nnZ-68GFFp908UU-qc5YR9OY')"></div>
+<div class="absolute inset-0 pointer-events-none border-2 border-primary/20 rounded-lg group-hover:border-primary/40 transition-colors"></div>
+<div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-lg flex items-center gap-3 ambient-shadow">
+<span class="material-symbols-outlined text-primary" data-icon="drag_pan" style="font-variation-settings: 'FILL' 1;">drag_pan</span>
+<p class="text-label-sm text-on-surface">Drag the pin to precisely locate your distribution hub</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Operations -->
+<div class="lg:col-span-5 space-y-gutter">
+<section class="bg-surface-container-lowest rounded-xl p-md ambient-shadow border-t-4 border-secondary">
+<div class="flex items-center gap-2 mb-md">
+<span class="material-symbols-outlined text-secondary" data-icon="settings_suggest">settings_suggest</span>
+<h2 class="font-headline-md text-on-surface">Operational Details</h2>
+</div>
+<div class="space-y-6">
+<!-- Service Radius -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<label class="font-label-md text-on-surface-variant">Service Radius</label>
+<span class="text-headline-md font-bold text-primary">15 <small class="text-sm font-normal">KM</small></span>
+</div>
+<input id="serviceRadius" class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer custom-range" max="100" min="1" type="range" value="15"/>
+<div class="flex justify-between mt-1 text-label-sm text-outline">
+<span>1 km</span>
+<span>100 km</span>
+</div>
+</div>
+<!-- Counters Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="p-4 bg-surface-container-low rounded-xl text-center">
+<label class="block font-label-sm text-on-surface-variant mb-2">Vehicles</label>
+<div class="flex items-center justify-center gap-3">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-variant active:scale-90 transition-all" onclick="updateCounter('vehicles', -1)">-</button>
+<span id="vehicles" class="text-headline-md font-bold">04</span>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-variant active:scale-90 transition-all" onclick="updateCounter('vehicles', 1)">+</button>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl text-center">
+<label class="block font-label-sm text-on-surface-variant mb-2">Volunteers</label>
+<div class="flex items-center justify-center gap-3">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-variant active:scale-90 transition-all" onclick="updateCounter('volunteers', -1)">-</button>
+<span id="volunteers" class="text-headline-md font-bold">12</span>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-variant active:scale-90 transition-all" onclick="updateCounter('volunteers', 1)">+</button>
+</div>
+</div>
+</div>
+<!-- Pickup Availability -->
+<div>
+<label class="block font-label-md text-on-surface-variant mb-3">Pickup Availability</label>
+<div class="grid grid-cols-4 gap-2">
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg bg-primary text-white">Mon</button>
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg hover:bg-surface-variant">Tue</button>
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg bg-primary text-white">Wed</button>
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg hover:bg-surface-variant">Thu</button>
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg bg-primary text-white">Fri</button>
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg hover:bg-surface-variant">Sat</button>
+<button class="py-2 px-1 text-label-sm border border-outline-variant rounded-lg hover:bg-surface-variant">Sun</button>
+</div>
+<div class="mt-4 flex items-center gap-4">
+<div class="flex-1">
+<label class="text-[10px] uppercase font-bold text-outline">Start Time</label>
+<input id="startTime" class="w-full bg-transparent border-b border-outline-variant py-1 focus:border-primary outline-none" type="time" value="09:00"/>
+</div>
+<div class="flex-1">
+<label class="text-[10px] uppercase font-bold text-outline">End Time</label>
+<input id="endTime" class="w-full bg-transparent border-b border-outline-variant py-1 focus:border-primary outline-none" type="time" value="18:00"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="flex gap-4">
+<button class="flex-1 py-4 border-2 border-primary text-primary font-bold rounded-xl active:scale-95 transition-transform hover:bg-primary/5">
+                        Back
+                    </button>
+<button class="flex-[2] py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform hover:opacity-90" onclick="submitStep3()">
+                        Continue
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-label-sm">Contact</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for the range slider value display
+        const range = document.querySelector('input[type="range"]');
+        const radiusDisplay = range?.parentElement.querySelector('.text-headline-md.font-bold.text-primary');
+        if (range && radiusDisplay) {
+            range.addEventListener('input', (e) => {
+                radiusDisplay.innerHTML = `${e.target.value} <small class="text-sm font-normal">KM</small>`;
+            });
+        }
+
+        // Toggle logic for availability chips
+        const dayButtons = document.querySelectorAll('.grid-cols-4 button');
+        dayButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('bg-primary');
+                btn.classList.toggle('text-white');
+                btn.classList.toggle('border-outline-variant');
+                btn.classList.toggle('hover:bg-surface-variant');
+            });
+        });
+
+        function updateCounter(id, delta) {
+            const el = document.getElementById(id);
+            let val = parseInt(el.innerText) || 0;
+            val = Math.max(0, val + delta);
+            el.innerText = val.toString().padStart(2, '0');
+        }
+
+        function submitStep3() {
+            let regData = JSON.parse(localStorage.getItem('ngo_reg_data') || '{}');
+            
+            regData.addressLine1 = document.getElementById('addressLine1').value;
+            regData.addressLine2 = document.getElementById('addressLine2').value;
+            regData.city = document.getElementById('city').value;
+            regData.state = document.getElementById('state').value;
+            regData.pincode = document.getElementById('pincode').value;
+            regData.emergencyContact = document.getElementById('emergencyContact').value;
+            
+            regData.serviceRadius = document.getElementById('serviceRadius').value;
+            regData.vehiclesCount = parseInt(document.getElementById('vehicles').innerText);
+            regData.volunteersCount = parseInt(document.getElementById('volunteers').innerText);
+            
+            let days = [];
+            document.querySelectorAll('.grid-cols-4 button.bg-primary').forEach(btn => {
+                days.push(btn.innerText);
+            });
+            
+            regData.operatingHours = {
+                days: days,
+                start: document.getElementById('startTime').value,
+                end: document.getElementById('endTime').value
+            };
+
+            localStorage.setItem('ngo_reg_data', JSON.stringify(regData));
+            window.location.href = '4_NGO_Registration_Step_4.html';
+        }
+    </script>
+    <script src="js/api.js"></script>
+</body></html>

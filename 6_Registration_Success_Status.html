@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registration Success | Food Rescue Hero</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .success-blob-animation {
+            animation: blob-pulse 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes blob-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.05; }
+            50% { transform: scale(1.1); opacity: 0.08; }
+        }
+        .step-connector {
+            width: 2px;
+            height: 100%;
+            background: #bdcac0;
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            z-index: 0;
+        }
+    </style>
+<!-- Tailwind Config Injection -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fdc656",
+                    "surface-container-highest": "#e1e3e2",
+                    "on-surface-variant": "#3e4942",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#f4be4e",
+                    "on-secondary-fixed": "#261900",
+                    "on-primary": "#ffffff",
+                    "secondary": "#7b5800",
+                    "tertiary": "#b7102a",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb3b1",
+                    "outline": "#6e7a72",
+                    "primary": "#006947",
+                    "on-secondary-container": "#735200",
+                    "outline-variant": "#bdcac0",
+                    "on-primary-fixed": "#002113",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1c",
+                    "surface-variant": "#e1e3e2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#006c49",
+                    "inverse-on-surface": "#eff1f0",
+                    "on-surface": "#191c1c",
+                    "inverse-surface": "#2e3131",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#92001c",
+                    "secondary-fixed": "#ffdea4",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#005236",
+                    "primary-container": "#00855b",
+                    "inverse-primary": "#72daa9",
+                    "tertiary-fixed": "#ffdad8",
+                    "surface-bright": "#f8faf9",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f8faf9",
+                    "surface-container": "#eceeed",
+                    "surface-container-low": "#f2f4f3",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#e6e9e8",
+                    "on-primary-container": "#f5fff6",
+                    "primary-fixed": "#8ef7c4",
+                    "surface-dim": "#d8dada",
+                    "primary-fixed-dim": "#72daa9",
+                    "tertiary-container": "#db313f",
+                    "surface": "#f8faf9",
+                    "on-tertiary-fixed": "#410007"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "lg": "48px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- TopAppBar (From JSON) -->
+<header class="bg-surface dark:bg-background shadow-sm dark:shadow-none docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed active:scale-95 duration-200 cursor-pointer">arrow_back</span>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-primary dark:text-primary-fixed font-bold cursor-pointer hover:opacity-90 transition-opacity font-label-md text-label-md">Registration</span>
+<span class="text-on-surface-variant dark:text-outline-variant cursor-pointer hover:opacity-90 transition-opacity font-label-md text-label-md">Help</span>
+<span class="text-on-surface-variant dark:text-outline-variant cursor-pointer hover:opacity-90 transition-opacity font-label-md text-label-md">Contact</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop py-lg relative">
+<!-- Background Ambient Element -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary rounded-full blur-[120px] opacity-5 pointer-events-none success-blob-animation"></div>
+<div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Hero Column -->
+<div class="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+<!-- Verified Illustration Wrapper -->
+<div class="relative w-32 h-32 md:w-40 md:h-40 mb-md">
+<div class="absolute inset-0 bg-primary/10 rounded-full animate-ping opacity-20"></div>
+<div class="relative w-full h-full bg-surface-container-lowest rounded-full shadow-lg flex items-center justify-center border-4 border-primary/20 overflow-hidden">
+<img class="w-24 h-24 object-contain" data-alt="A professional 3D vector illustration of a restaurant building with a large green checkmark shield floating in front of it. The style is Corporate Modern with soft lighting, using a palette of deep emerald greens, warm yellows, and clean whites. The background is a soft ivory, suggesting a premium and trustworthy food technology brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGRpCaAIieaemboB7pghsQQuXvYt5wDxOK_8eBZuijhBkKeLnO4hotqyjBLwVoh_UOwbghhh93IhKI1_3D8OVW9HBxWwhESo6w7a0W75bzqMQbUaWJMxuzblFht_WYxPpqyEzPh8OUWpZmDNOC9eHBP5XDBEedSzOP7hc9D9YfPCLt_urg5KUpfwlD4wG9VWlrVqvWSoNYFP96udn0M769237nbPaHTAPHqrf3BGQc-w-PnctPl2su24qkVu_SykhdYuTRvPBW31k"/>
+</div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">Registration Submitted Successfully</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-lg">
+                    Thank you for joining the mission. Your application to become a verified food rescue partner is now in our system.
+                </p>
+<!-- Impact Card (Trust Focused) -->
+<div class="w-full bg-white rounded-xl shadow-[0_4px_12px_rgba(15,138,95,0.05)] border-t-4 border-secondary-container p-md mb-lg">
+<div class="flex items-start gap-4">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Estimated Review Time</p>
+<p class="font-headline-md text-headline-md text-secondary">24–48 Hours</p>
+<p class="text-sm text-on-surface-variant mt-1">Our team is manually verifying your business credentials to maintain food safety standards.</p>
+</div>
+</div>
+</div>
+<!-- Desktop Buttons -->
+<div class="hidden lg:flex gap-4">
+<button onclick="window.location.href='7_restaurant_dashboard.html'" class="bg-primary text-white font-label-md px-lg py-4 rounded-xl hover:opacity-90 transition-all shadow-md active:scale-95 flex items-center gap-2">
+                        Go to Dashboard
+                        <span class="material-symbols-outlined text-[18px]">dashboard</span>
+</button>
+<button class="border-2 border-primary text-primary font-label-md px-lg py-4 rounded-xl hover:bg-primary/5 transition-all active:scale-95">
+                        Track Verification Status
+                    </button>
+</div>
+</div>
+<!-- Timeline Column -->
+<div class="lg:col-span-5 w-full">
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(15,138,95,0.05)] p-md md:p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Application Progress</h3>
+<div class="flex flex-col gap-8 relative">
+<!-- Step 1: Completed -->
+<div class="flex gap-4 relative z-10">
+<div class="step-connector"></div>
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary">Registration Completed</h4>
+<p class="text-sm text-on-surface-variant">Details and documents received</p>
+</div>
+</div>
+<!-- Step 2: Pending (Current) -->
+<div class="flex gap-4 relative z-10">
+<div class="step-connector"></div>
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center shrink-0 border-4 border-white shadow-sm">
+<span class="material-symbols-outlined text-on-secondary-container text-[14px] animate-spin-slow" style="font-variation-settings: 'wght' 700;">pending</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-secondary">Admin Verification Pending</h4>
+<p class="text-sm text-on-surface-variant">Queue position: #12 in your region</p>
+</div>
+</div>
+<!-- Step 3: Future -->
+<div class="flex gap-4 relative z-10">
+<div class="step-connector"></div>
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-outline">Document Review</h4>
+<p class="text-sm text-outline-variant">Identity and hygiene certificates check</p>
+</div>
+</div>
+<!-- Step 4: Future -->
+<div class="flex gap-4 relative z-10">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-outline">Approval</h4>
+<p class="text-sm text-outline-variant">Access to donation platform</p>
+</div>
+</div>
+</div>
+<!-- Helpful Note -->
+<div class="mt-lg p-4 bg-primary/5 rounded-lg border border-primary/10">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">info</span>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+                                While you wait, you can start exploring the <strong>Rescue Guidelines</strong> to prepare your first donation batches.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Mobile Buttons -->
+<div class="flex lg:hidden flex-col gap-3 w-full mt-md">
+<button onclick="window.location.href='7_restaurant_dashboard.html'" class="bg-primary text-white font-label-md w-full py-4 rounded-xl hover:opacity-90 shadow-md active:scale-95 flex items-center justify-center gap-2">
+                    Go to Dashboard
+                    <span class="material-symbols-outlined text-[18px]">dashboard</span>
+</button>
+<button class="border-2 border-primary text-primary font-label-md w-full py-4 rounded-xl active:scale-95">
+                    Track Verification Status
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (From JSON) - Only visible on mobile/tablet -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-label-sm">Contact</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for the verification icon
+        const heroIcon = document.querySelector('img[data-alt]');
+        if (heroIcon) {
+            heroIcon.parentElement.addEventListener('mouseenter', () => {
+                heroIcon.style.transform = 'scale(1.1) rotate(5deg)';
+                heroIcon.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            heroIcon.parentElement.addEventListener('mouseleave', () => {
+                heroIcon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        }
+
+        // Add slow rotation to the pending icon
+        const styleTag = document.createElement('style');
+        styleTag.innerHTML = `
+            @keyframes spin-slow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            .animate-spin-slow {
+                animation: spin-slow 4s linear infinite;
+            }
+        `;
+        document.head.appendChild(styleTag);
+    </script>
+</body></html>

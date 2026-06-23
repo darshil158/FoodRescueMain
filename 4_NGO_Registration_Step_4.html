@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .step-active {
+            box-shadow: 0 0 0 4px rgba(0, 105, 71, 0.1);
+        }
+        .document-card:hover {
+            transform: translateY(-4px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f8faf9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#db313f",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8faf9",
+                        "inverse-on-surface": "#eff1f0",
+                        "surface-container": "#eceeed",
+                        "outline": "#6e7a72",
+                        "tertiary": "#b7102a",
+                        "on-tertiary-fixed": "#410007",
+                        "secondary": "#7b5800",
+                        "primary-container": "#00855b",
+                        "primary": "#006947",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#5d4200",
+                        "inverse-primary": "#72daa9",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#92001c",
+                        "tertiary-fixed": "#ffdad8",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#735200",
+                        "surface-dim": "#d8dada",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-high": "#e6e9e8",
+                        "secondary-container": "#fdc656",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2e3131",
+                        "tertiary-fixed-dim": "#ffb3b1",
+                        "background": "#f8faf9",
+                        "secondary-fixed-dim": "#f4be4e",
+                        "surface-tint": "#006c49",
+                        "primary-fixed-dim": "#72daa9",
+                        "on-primary-container": "#f5fff6",
+                        "surface-variant": "#e1e3e2",
+                        "primary-fixed": "#8ef7c4",
+                        "on-surface": "#191c1c",
+                        "outline-variant": "#bdcac0",
+                        "surface-container-highest": "#e1e3e2",
+                        "on-secondary-fixed": "#261900",
+                        "secondary-fixed": "#ffdea4",
+                        "surface-container-low": "#f2f4f3",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3e4942",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "xs": "4px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-background shadow-sm dark:shadow-none px-margin-mobile md:px-margin-desktop py-base flex justify-between items-center h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-90 transition-opacity active:scale-95 duration-200">arrow_back</button>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="font-label-md text-label-md text-primary dark:text-primary-fixed font-bold">Registration</span>
+<span class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant">Help</span>
+<span class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant">Contact</span>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<!-- Stepper Section -->
+<section class="mb-lg">
+<div class="flex justify-between items-center mb-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary">Document Verification</h2>
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-4 py-1 rounded-full">Step 4 of 5</span>
+</div>
+<div class="w-full flex gap-2 h-2">
+<div class="flex-1 bg-primary rounded-full"></div>
+<div class="flex-1 bg-primary rounded-full"></div>
+<div class="flex-1 bg-primary rounded-full"></div>
+<div class="flex-1 bg-primary rounded-full relative">
+<div class="absolute inset-0 bg-primary opacity-30 animate-pulse"></div>
+</div>
+<div class="flex-1 bg-outline-variant rounded-full"></div>
+</div>
+</section>
+<!-- Introduction -->
+<div class="mb-lg">
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Please upload the required legal documents to verify your NGO's status. Clear scans or photos help speed up the verification process.
+            </p>
+</div>
+<!-- Document Upload Area -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0_4px_12px_rgba(15,138,95,0.05)] border border-outline-variant/30 flex flex-col gap-4">
+    <div id="globalError" class="text-error text-label-md bg-error-container p-3 rounded-lg hidden"></div>
+    <div class="border-2 border-dashed border-primary/40 rounded-xl p-8 text-center hover:bg-primary/5 transition-colors cursor-pointer relative" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="handleFileSelect(event)">
+        <span class="material-symbols-outlined text-primary text-4xl mb-2">cloud_upload</span>
+        <h3 class="font-headline-md text-label-md font-bold mb-1">Upload Required Documents</h3>
+        <p class="text-label-sm text-on-surface-variant">Registration Certificate, PAN Card, Office Photo, Address Proof</p>
+        <p class="text-label-sm text-primary mt-2">PDF, JPG, PNG up to 10MB</p>
+    </div>
+
+    <!-- File List Preview -->
+    <div id="fileList" class="flex flex-col gap-3 mt-4"></div>
+</div>
+<!-- Action Footer -->
+<div class="mt-xl flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<p class="text-label-sm">All uploads are encrypted and processed securely according to global data standards.</p>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-xl py-sm font-label-md border-2 border-primary text-primary rounded-xl hover:bg-primary/5 transition-all active:scale-95">Back</button>
+<button class="flex-1 md:flex-none px-xl py-sm font-label-md bg-primary text-on-primary rounded-xl shadow-[0_4px_12px_rgba(15,138,95,0.2)] hover:opacity-90 transition-all active:scale-95" onclick="submitStep4()">Continue</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm text-label-sm">Contact</span>
+</a>
+</nav>
+    <script>
+        const MAX_SIZE = 10 * 1024 * 1024;
+        let selectedFiles = [];
+
+        function showError(msg) {
+            const err = document.getElementById('globalError');
+            err.textContent = '⚠️ ' + msg;
+            err.classList.remove('hidden');
+        }
+        function hideError() {
+            document.getElementById('globalError').classList.add('hidden');
+        }
+
+        function handleFileSelect(event) {
+            hideError();
+            const files = Array.from(event.target.files);
+            for (const file of files) {
+                if (file.size > MAX_SIZE) {
+                    showError(`File ${file.name} exceeds 10MB limit.`);
+                    continue;
+                }
+                const validTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+                if (!validTypes.includes(file.type)) {
+                    showError(`File ${file.name} has unsupported type.`);
+                    continue;
+                }
+                selectedFiles.push(file);
+            }
+            // Clear input so same file can be selected again if removed
+            event.target.value = '';
+            renderFileList();
+        }
+
+        function renderFileList() {
+            const list = document.getElementById('fileList');
+            list.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const isImage = file.type.startsWith('image/');
+                const previewUrl = isImage ? URL.createObjectURL(file) : '';
+                
+                list.innerHTML += `
+                    <div class="flex items-center gap-3 p-3 bg-surface-container rounded-lg border border-outline-variant/30">
+                        ${isImage ? `<img src="${previewUrl}" class="w-10 h-10 object-cover rounded">` : `<span class="material-symbols-outlined text-primary text-2xl">description</span>`}
+                        <div class="flex-1 min-w-0">
+                            <p class="text-label-sm truncate font-bold">${file.name}</p>
+                            <p class="text-[10px] text-on-surface-variant">${(file.size / (1024*1024)).toFixed(2)} MB</p>
+                            <div class="w-full h-1 bg-surface-variant mt-1 rounded-full overflow-hidden hidden" id="progressWrap-${index}">
+                                <div class="h-full bg-primary w-0 transition-all duration-300" id="progress-${index}"></div>
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined text-error cursor-pointer hover:bg-error-container p-1 rounded transition" onclick="removeFile(${index})">delete</span>
+                    </div>
+                `;
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+        }
+
+        async function submitStep4() {
+            if (selectedFiles.length === 0) {
+                return showError("Please upload at least one document.");
+            }
+            hideError();
+
+            const btn = document.querySelector('button[onclick="submitStep4()"]');
+            btn.innerHTML = 'Uploading...';
+            btn.disabled = true;
+
+            try {
+                const token = ApiClient.getToken();
+                if (!token) throw new Error("Authentication missing. Please start from Step 1.");
+                
+                const backendUrl = ApiClient.baseUrl || 'http://localhost:3000/api';
+                const documentUrls = [];
+
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    const f = selectedFiles[i];
+                    const pWrap = document.getElementById(`progressWrap-${i}`);
+                    if(pWrap) pWrap.classList.remove('hidden');
+                    const pBar = document.getElementById(`progress-${i}`);
+
+                    // 1. Get Presigned URL
+                    const urlRes = await fetch(`${backendUrl}/ngo/upload-url`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ filename: f.name, mimeType: f.type })
+                    });
+                    const urlData = await urlRes.json();
+                    if (!urlRes.ok) throw new Error(urlData.message || 'Failed to get upload URL');
+
+                    const { uploadUrl, key, publicUrl } = urlData.data;
+                    if(pBar) pBar.style.width = '30%';
+
+                    // 2. Upload directly to R2
+                    const r2Res = await fetch(uploadUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': f.type
+                        },
+                        body: f
+                    });
+
+                    if (!r2Res.ok) throw new Error(`Direct upload to Cloud failed for ${f.name}`);
+                    if(pBar) pBar.style.width = '70%';
+
+                    // 3. Confirm & Validate Magic Bytes on Backend
+                    const confirmRes = await fetch(`${backendUrl}/ngo/upload-confirm`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ key })
+                    });
+                    const confirmData = await confirmRes.json();
+                    if (!confirmRes.ok) throw new Error(confirmData.message || `File validation failed for ${f.name}`);
+
+                    documentUrls.push(publicUrl);
+                    if(pBar) pBar.style.width = '100%';
+                }
+
+                let regData = JSON.parse(localStorage.getItem('ngo_reg_data') || '{}');
+                regData.documentUrls = documentUrls;
+                localStorage.setItem('ngo_reg_data', JSON.stringify(regData));
+                
+                window.location.href = '5_NGO_Registration_Step_5.html';
+            } catch (err) {
+                showError(err.message || 'Error uploading files');
+                btn.innerHTML = 'Continue';
+                btn.disabled = false;
+            }
+        }
+    </script>
+    <script src="js/api.js"></script>
+<style>
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(250%); }
+        }
+    </style>
+</body></html>

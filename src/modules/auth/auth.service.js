@@ -19,7 +19,7 @@ const generateTokens = async (uid, role, sessionId, is2FAVerified = false) => {
   );
 
   const refreshToken = jwt.sign(
-    { uid, sessionId },
+    { uid, sessionId, is2FAVerified },
     process.env.JWT_REFRESH_SECRET,
     { expiresIn: '7d' } // Long-lived
   );
@@ -212,12 +212,9 @@ class AuthService {
       const userDoc = await db.collection('users').doc(decoded.uid).get();
       const user = userDoc.data();
 
-      // We maintain the 2FA status from the current session's refresh token? 
-      // Refresh tokens don't carry 2FA state natively in our implementation, 
-      // but usually if you have a valid session, you don't need to re-2FA unless the session expires.
-      // For high security (Admin), let's assume if they have a refresh token, 2FA was done.
-      // Or require 2FA on every refresh? Let's just issue tokens.
-      const is2FAVerified = user.isTwoFactorEnabled ? true : false; 
+      // Ensure that a user who hasn't completed 2FA cannot bypass it by refreshing
+      // The old RefreshToken might not have is2FAVerified, so default to false if undefined
+      const is2FAVerified = decoded.is2FAVerified === true ? true : (!user.isTwoFactorEnabled);
       
       const tokens = await generateTokens(user.uid, user.role, decoded.sessionId, is2FAVerified);
       return tokens;

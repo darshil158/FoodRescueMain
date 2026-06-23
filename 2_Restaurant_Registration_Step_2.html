@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Food Rescue Hero | Restaurant Registration</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fdc656",
+                    "surface-container-highest": "#e1e3e2",
+                    "on-surface-variant": "#3e4942",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#f4be4e",
+                    "on-secondary-fixed": "#261900",
+                    "on-primary": "#ffffff",
+                    "secondary": "#7b5800",
+                    "tertiary": "#b7102a",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb3b1",
+                    "outline": "#6e7a72",
+                    "primary": "#006947",
+                    "on-secondary-container": "#735200",
+                    "outline-variant": "#bdcac0",
+                    "on-primary-fixed": "#002113",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1c",
+                    "surface-variant": "#e1e3e2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#006c49",
+                    "inverse-on-surface": "#eff1f0",
+                    "on-surface": "#191c1c",
+                    "inverse-surface": "#2e3131",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#92001c",
+                    "secondary-fixed": "#ffdea4",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#005236",
+                    "primary-container": "#00855b",
+                    "inverse-primary": "#72daa9",
+                    "tertiary-fixed": "#ffdad8",
+                    "surface-bright": "#f8faf9",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f8faf9",
+                    "surface-container": "#eceeed",
+                    "surface-container-low": "#f2f4f3",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#e6e9e8",
+                    "on-primary-container": "#f5fff6",
+                    "primary-fixed": "#8ef7c4",
+                    "surface-dim": "#d8dada",
+                    "primary-fixed-dim": "#72daa9",
+                    "tertiary-container": "#db313f",
+                    "surface": "#f8faf9",
+                    "on-tertiary-fixed": "#410007"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "16px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "lg": "48px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .ambient-shadow {
+        box-shadow: 0 4px 12px rgba(15, 138, 95, 0.05);
+      }
+      .input-focus-glow:focus {
+        box-shadow: 0 0 0 4px rgba(0, 105, 71, 0.1);
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-50 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base shadow-sm">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 hover:opacity-90 transition-opacity text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex gap-6 items-center">
+<span class="text-on-surface-variant font-label-md">Already a hero? <a class="text-primary font-bold" href="#">Login</a></span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-lg mb-32">
+<!-- Progress Header -->
+<div class="mb-12">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">Step 2: Restaurant Details</h2>
+<span class="font-label-md text-on-surface-variant">Step 2 of 5</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container w-[40%] transition-all duration-500 ease-out"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] font-label-sm uppercase tracking-wider text-primary font-bold">Account</span>
+<span class="text-[10px] font-label-sm uppercase tracking-wider text-primary font-bold">Details</span>
+<span class="text-[10px] font-label-sm uppercase tracking-wider text-on-surface-variant opacity-40">Location</span>
+<span class="text-[10px] font-label-sm uppercase tracking-wider text-on-surface-variant opacity-40">Documents</span>
+<span class="text-[10px] font-label-sm uppercase tracking-wider text-on-surface-variant opacity-40">Review</span>
+</div>
+</div>
+<form class="space-y-8" onsubmit="submitStep2(event)">
+<!-- Basic Information Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md md:p-lg ambient-shadow border border-surface-container">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Identity &amp; Establishment</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Restaurant Name -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1">Restaurant Name</label>
+<input id="restName" required class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all" placeholder="e.g. The Green Kitchen" type="text"/>
+</div>
+<!-- Restaurant Type -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1">Restaurant Type</label>
+<select id="restType" required class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all appearance-none">
+<option disabled="" selected="" value="">Select Type</option>
+<option value="Fine Dining Restaurant">Fine Dining Restaurant</option>
+<option value="Cafe / Bistro">Cafe / Bistro</option>
+<option value="Hotel / Resort">Hotel / Resort</option>
+<option value="Bakery / Confectionery">Bakery / Confectionery</option>
+<option value="Cloud Kitchen">Cloud Kitchen</option>
+<option value="Catering Service">Catering Service</option>
+</select>
+</div>
+<!-- FSSAI -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-on-surface-variant ml-1">FSSAI License Number</label>
+<span class="text-[10px] text-tertiary font-bold uppercase tracking-tight">Required</span>
+</div>
+<input id="restFSSAI" required class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all" placeholder="14-digit FSSAI Number" type="text"/>
+</div>
+<!-- GST -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-on-surface-variant ml-1">GST Number</label>
+<span class="text-[10px] text-on-surface-variant opacity-60 font-bold uppercase tracking-tight">Optional</span>
+</div>
+<input id="restGST" class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all" placeholder="e.g. 22AAAAA0000A1Z5" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1">Years in Business</label>
+<input id="restYears" class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all" placeholder="Enter number of years" type="number"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1">Avg Daily Customers</label>
+<input id="restCustomers" class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all" placeholder="Approximate daily footfall" type="number"/>
+</div>
+</div>
+<div class="mt-6 flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1">Establishment Description</label>
+<textarea id="restDesc" class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 outline-none focus:border-primary input-focus-glow transition-all resize-none" placeholder="Briefly describe your specialty and focus..." rows="3"></textarea>
+</div>
+</section>
+<!-- Food Donation Details Card -->
+<section class="bg-surface-container-lowest rounded-xl p-md md:p-lg ambient-shadow border-t-4 border-secondary border-x border-b border-surface-container">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Food Donation Potential</h3>
+</div>
+<!-- Daily Surplus Meals Chips -->
+<div class="mb-8">
+<label class="font-label-md text-on-surface-variant ml-1 block mb-3">Avg. Daily Surplus Meals (Estimated)</label>
+<div class="flex flex-wrap gap-3">
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="surplus" value="1-10" type="radio"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all font-label-md">1 - 10 meals</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="surplus" value="10-25" type="radio"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all font-label-md">10 - 25 meals</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="surplus" value="25-50" type="radio"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all font-label-md">25 - 50 meals</div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="surplus" value="50+" type="radio"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container peer-checked:border-primary transition-all font-label-md">50+ meals</div>
+</label>
+</div>
+</div>
+<!-- Food Types Multi-select Chips -->
+<div>
+<label class="font-label-md text-on-surface-variant ml-1 block mb-3">Food Types Regularly Available (Select all that apply)</label>
+<div class="flex flex-wrap gap-3">
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="foodTypes" value="Vegetarian" type="checkbox"/>
+<div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all font-label-md">
+<span class="material-symbols-outlined text-[18px]">eco</span>
+                                Vegetarian
+                            </div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="foodTypes" value="Non-Veg" type="checkbox"/>
+<div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all font-label-md">
+<span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
+                                Non-Veg
+                            </div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="foodTypes" value="Bakery" type="checkbox"/>
+<div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all font-label-md">
+<span class="material-symbols-outlined text-[18px]">bakery_dining</span>
+                                Bakery Items
+                            </div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="foodTypes" value="Fast Food" type="checkbox"/>
+<div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all font-label-md">
+<span class="material-symbols-outlined text-[18px]">lunch_dining</span>
+                                Fast Food
+                            </div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="foodTypes" value="Beverages" type="checkbox"/>
+<div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all font-label-md">
+<span class="material-symbols-outlined text-[18px]">local_drink</span>
+                                Beverages
+                            </div>
+</label>
+<label class="relative group cursor-pointer">
+<input class="peer sr-only" name="foodTypes" value="Snacks" type="checkbox"/>
+<div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant peer-checked:bg-primary/10 peer-checked:text-primary peer-checked:border-primary transition-all font-label-md">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+                                Packaged Snacks
+                            </div>
+</label>
+</div>
+</div>
+</section>
+<!-- Sticky Bottom Action Bar for Mobile / Flex for Desktop -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-surface/80 backdrop-blur-md md:relative md:bg-transparent md:p-0 flex items-center justify-between gap-4 mt-12">
+<button class="flex-1 md:flex-none px-8 py-4 rounded-xl font-label-md text-primary border-2 border-primary bg-white hover:bg-primary/5 transition-all active:scale-95 duration-200" type="button">
+                    Back
+                </button>
+<button class="flex-[2] md:flex-none md:min-w-[200px] px-8 py-4 rounded-xl font-label-md bg-primary text-white hover:opacity-90 transition-all active:scale-95 duration-200 ambient-shadow flex items-center justify-center gap-2" type="submit">
+                    Continue to Location
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-[60] flex justify-around items-center px-4 py-2 bg-surface shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm text-label-sm">Contact</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions for form focus
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label')?.classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label')?.classList.remove('text-primary');
+            });
+        });
+
+        // Prevention of double submit
+        function submitStep2(e) {
+            e.preventDefault();
+            const form = document.querySelector('form');
+            const btn = form.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Processing...';
+            btn.classList.add('opacity-70', 'pointer-events-none');
+            
+            const surplusElement = document.querySelector('input[name="surplus"]:checked');
+            const foodTypesElements = document.querySelectorAll('input[name="foodTypes"]:checked');
+            
+            let regData = JSON.parse(localStorage.getItem('restaurant_reg_data') || '{}');
+            regData.businessName = document.getElementById('restName').value;
+            regData.restaurantType = document.getElementById('restType').value;
+            regData.fssaiNumber = document.getElementById('restFSSAI').value;
+            regData.gstNumber = document.getElementById('restGST').value;
+            regData.yearsInBusiness = document.getElementById('restYears').value;
+            regData.avgDailyCustomers = document.getElementById('restCustomers').value;
+            regData.description = document.getElementById('restDesc').value;
+            
+            regData.surplusMeals = surplusElement ? surplusElement.value : '';
+            regData.foodTypes = Array.from(foodTypesElements).map(el => el.value);
+
+            localStorage.setItem('restaurant_reg_data', JSON.stringify(regData));
+
+            setTimeout(() => {
+                window.location.href = '3_Restaurant_Registration_Step_3.html';
+            }, 500);
+        }
+    </script>
+    <script src="js/api.js"></script>
+</body></html>

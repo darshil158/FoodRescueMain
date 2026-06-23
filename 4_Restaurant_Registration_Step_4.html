@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Food Rescue Hero | Document Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-container": "#fdc656",
+                "surface-container-highest": "#e1e3e2",
+                "on-surface-variant": "#3e4942",
+                "on-error-container": "#93000a",
+                "secondary-fixed-dim": "#f4be4e",
+                "on-secondary-fixed": "#261900",
+                "on-primary": "#ffffff",
+                "secondary": "#7b5800",
+                "tertiary": "#b7102a",
+                "error": "#ba1a1a",
+                "tertiary-fixed-dim": "#ffb3b1",
+                "outline": "#6e7a72",
+                "primary": "#006947",
+                "on-secondary-container": "#735200",
+                "outline-variant": "#bdcac0",
+                "on-primary-fixed": "#002113",
+                "on-error": "#ffffff",
+                "on-background": "#191c1c",
+                "surface-variant": "#e1e3e2",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary": "#ffffff",
+                "surface-tint": "#006c49",
+                "inverse-on-surface": "#eff1f0",
+                "on-surface": "#191c1c",
+                "inverse-surface": "#2e3131",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-fixed-variant": "#92001c",
+                "secondary-fixed": "#ffdea4",
+                "error-container": "#ffdad6",
+                "on-primary-fixed-variant": "#005236",
+                "primary-container": "#00855b",
+                "inverse-primary": "#72daa9",
+                "tertiary-fixed": "#ffdad8",
+                "surface-bright": "#f8faf9",
+                "on-tertiary-container": "#fffbff",
+                "background": "#f8faf9",
+                "surface-container": "#eceeed",
+                "surface-container-low": "#f2f4f3",
+                "on-secondary-fixed-variant": "#5d4200",
+                "surface-container-high": "#e6e9e8",
+                "on-primary-container": "#f5fff6",
+                "primary-fixed": "#8ef7c4",
+                "surface-dim": "#d8dada",
+                "primary-fixed-dim": "#72daa9",
+                "tertiary-container": "#db313f",
+                "surface": "#f8faf9",
+                "on-tertiary-fixed": "#410007"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "gutter": "24px",
+                "xl": "80px",
+                "margin-mobile": "16px",
+                "margin-desktop": "64px",
+                "lg": "48px",
+                "md": "24px",
+                "sm": "12px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "display-lg-mobile": ["Inter"],
+                "label-md": ["Inter"],
+                "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf9; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .upload-card-shadow {
+            box-shadow: 0 4px 12px rgba(15, 138, 95, 0.05);
+        }
+        .progress-bar-animate {
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- Top AppBar (From JSON) -->
+<header class="bg-surface dark:bg-background shadow-sm dark:shadow-none flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed hover:opacity-90 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex gap-6">
+<span class="text-primary dark:text-primary-fixed font-bold font-label-md text-label-md cursor-pointer hover:opacity-90">Registration</span>
+<span class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md cursor-pointer hover:opacity-90">Help</span>
+<span class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md cursor-pointer hover:opacity-90">Contact</span>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-margin-mobile md:px-0 py-lg">
+<!-- Step Indicator -->
+<div class="mb-lg">
+<div class="flex justify-between items-end mb-base">
+<div>
+<p class="text-primary font-label-md text-label-md uppercase tracking-wider mb-xs">Step 4 of 5</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Document Verification</h2>
+</div>
+<div class="text-right">
+<span class="text-on-surface-variant font-label-md text-label-md">Documents Uploaded</span>
+<p class="text-headline-md font-headline-md text-primary">1 / 3</p>
+</div>
+</div>
+<!-- Global Progress Bar -->
+<div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary progress-bar-animate" style="width: 33.33%"></div>
+</div>
+</div>
+<!-- Verification Canvas -->
+<div class="space-y-md">
+<!-- 1. Restaurant Front Photo (COMPLETED STATE) -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant upload-card-shadow transition-all hover:border-primary/30">
+<div class="flex items-start justify-between mb-sm">
+<div class="flex items-center gap-base">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Restaurant Front Photo</h3>
+<p class="font-body-md text-label-md text-on-surface-variant">Clear exterior shot with signage visible</p>
+</div>
+</div>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Uploaded
+                    </span>
+</div>
+<!-- Preview Area -->
+<div class="relative group mt-sm h-48 rounded-xl overflow-hidden border border-outline-variant">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A professional, high-quality photograph of a modern bistro entrance during the day. The restaurant has a clean dark green facade with a wooden sign that says 'The Green Plate'. Large glass windows show a warm, inviting interior with soft lighting. The aesthetic is professional, reliable, and corporate-modern." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDP6U92R0cy8DKZ3ltIJ3cBLhIflN_37FvppkU9aMiO42-6minXjAI6ANLIDpSANYPX0QVAt7HMW6NvdNuXWsjP7scFcfOblbKbJv4HM6PcE6SkN87jXvfz-BBfOzhXWWXXT6iGnQgUES4pZM-mY8emPehE2wYPqY8fzf4yle1Bcynn1x4WGFQWqv1PQLCNp4e5oxfouKGQLnpV8SvWPyQUcV3kzIHmtgGxIQwOTsKmhQsI7yM0C_nL3NlU5vfhOcRo2SKrFF78VjU')"></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-sm">
+<button class="bg-white text-primary px-4 py-2 rounded-xl font-label-md flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">refresh</span> Replace
+                        </button>
+<button class="bg-tertiary text-white px-4 py-2 rounded-xl font-label-md flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">delete</span> Remove
+                        </button>
+</div>
+</div>
+</div>
+<!-- 2. FSSAI Certificate (IN PROGRESS STATE) -->
+<div class="bg-surface-container-lowest rounded-xl p-md border-2 border-dashed border-primary upload-card-shadow">
+<div class="flex items-start justify-between mb-sm">
+<div class="flex items-center gap-base">
+<div class="bg-secondary-container/20 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">FSSAI Certificate</h3>
+<p class="font-body-md text-label-md text-on-surface-variant">Valid Food Safety License (PDF or JPG)</p>
+</div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm font-bold animate-pulse">
+                        Uploading...
+                    </span>
+</div>
+<!-- Progress State -->
+<div class="mt-base bg-surface-container-low p-sm rounded-lg border border-outline-variant">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+                            fssai_license_2023.pdf
+                        </span>
+<span class="text-primary font-bold font-label-md">75%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary progress-bar-animate" style="width: 75%"></div>
+</div>
+</div>
+</div>
+<!-- 3. Business Proof (PENDING STATE) -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant upload-card-shadow group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-base">
+<div class="bg-surface-container-highest p-2 rounded-lg text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">business_center</span>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Business Proof</h3>
+<p class="font-body-md text-label-md text-on-surface-variant">GST Registration or Trade License</p>
+</div>
+</div>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-bold">
+                        Pending
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-sm mt-md">
+<button class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl hover:bg-primary/5 transition-colors group/btn">
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]">upload_file</span>
+<span class="font-label-md text-on-surface">Choose File</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl hover:bg-primary/5 transition-colors group/btn">
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]">photo_camera</span>
+<span class="font-label-md text-on-surface">Take Photo</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Buttons -->
+<div class="fixed bottom-0 left-0 right-0 bg-surface/80 backdrop-blur-md p-md border-t border-outline-variant md:relative md:bg-transparent md:border-0 md:px-0 md:mt-lg">
+<div class="max-w-3xl mx-auto flex gap-md">
+<button class="flex-1 py-4 px-6 border-2 border-primary text-primary font-bold rounded-2xl hover:bg-primary/5 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">chevron_left</span>
+                    Back
+                </button>
+<button onclick="submitStep4()" class="flex-[2] py-4 px-6 bg-primary text-white font-bold rounded-2xl shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    Continue to Review
+                    <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (From JSON - Filtered for Registration task) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm text-label-sm">Contact</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Progress bar simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.progress-bar-animate');
+            // Adding a slight delay for entry animation effect
+            setTimeout(() => {
+                bars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => bar.style.width = width, 100);
+                });
+            }, 500);
+        });
+
+        function submitStep4() {
+            let regData = JSON.parse(localStorage.getItem('restaurant_reg_data') || '{}');
+            // Mocking uploaded document URLs
+            regData.restaurantFrontPhotoUrl = 'mock_url_front_photo.jpg';
+            regData.fssaiCertificateUrl = 'mock_url_fssai.pdf';
+            regData.businessProofUrl = 'mock_url_business_proof.pdf';
+            
+            localStorage.setItem('restaurant_reg_data', JSON.stringify(regData));
+            window.location.href = '5_Restaurant_Registration_Step_5.html';
+        }
+    </script>
+    <script src="js/api.js"></script>
+</body></html>

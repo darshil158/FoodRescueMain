@@ -4,24 +4,33 @@ const AuthController = require('./auth.controller');
 const OTPController = require('./otp.controller');
 const { requireAuth } = require('../../middleware/auth');
 const { validate, authSchemas } = require('./auth.validator');
+const rateLimit = require('express-rate-limit');
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 auth requests per window
+  message: { error: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // ─── Public Auth Routes ───────────────────────────────────────────────────────
-router.post('/register', validate(authSchemas.register), AuthController.register);
-router.post('/login',    validate(authSchemas.login),    AuthController.login);
-router.post('/google',   validate(authSchemas.google),   AuthController.googleLogin);
+router.post('/register', authLimiter, validate(authSchemas.register), AuthController.register);
+router.post('/login',    authLimiter, validate(authSchemas.login),    AuthController.login);
+router.post('/google',   authLimiter, validate(authSchemas.google),   AuthController.googleLogin);
 router.post('/refresh',  AuthController.refresh);
 
 // ─── OTP: Login with Email OTP ────────────────────────────────────────────────
-router.post('/otp/send',   OTPController.sendLoginOTP);
-router.post('/otp/verify', OTPController.verifyLoginOTP);
+router.post('/otp/send',   authLimiter, OTPController.sendLoginOTP);
+router.post('/otp/verify', authLimiter, OTPController.verifyLoginOTP);
 
 // ─── OTP: Email Verification (after registration) ─────────────────────────────
-router.post('/verify/send',   OTPController.sendVerifyOTP);
-router.post('/verify/confirm', OTPController.confirmEmailOTP);
+router.post('/verify/send',   authLimiter, OTPController.sendVerifyOTP);
+router.post('/verify/confirm', authLimiter, OTPController.confirmEmailOTP);
 
 // ─── Forgot Password ──────────────────────────────────────────────────────────
-router.post('/forgot-password',      OTPController.sendForgotPasswordOTP);
-router.post('/reset-password',       OTPController.resetPassword);
+router.post('/forgot-password',      authLimiter, OTPController.sendForgotPasswordOTP);
+router.post('/reset-password',       authLimiter, OTPController.resetPassword);
 
 // ─── Protected Routes ────────────────────────────────────────────────────────
 router.post('/logout', requireAuth, AuthController.logout);

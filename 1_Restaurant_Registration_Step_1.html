@@ -1,0 +1,375 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Food Rescue Hero - Account Creation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fdc656",
+                        "surface-container-highest": "#e1e3e2",
+                        "on-surface-variant": "#3e4942",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#f4be4e",
+                        "on-secondary-fixed": "#261900",
+                        "on-primary": "#ffffff",
+                        "secondary": "#7b5800",
+                        "tertiary": "#b7102a",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb3b1",
+                        "outline": "#6e7a72",
+                        "primary": "#006947",
+                        "on-secondary-container": "#735200",
+                        "outline-variant": "#bdcac0",
+                        "on-primary-fixed": "#002113",
+                        "on-error": "#ffffff",
+                        "on-background": "#191c1c",
+                        "surface-variant": "#e1e3e2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#006c49",
+                        "inverse-on-surface": "#eff1f0",
+                        "on-surface": "#191c1c",
+                        "inverse-surface": "#2e3131",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#92001c",
+                        "secondary-fixed": "#ffdea4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#005236",
+                        "primary-container": "#00855b",
+                        "inverse-primary": "#72daa9",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-bright": "#f8faf9",
+                        "on-tertiary-container": "#fffbff",
+                        "background": "#f8faf9",
+                        "surface-container": "#eceeed",
+                        "surface-container-low": "#f2f4f3",
+                        "on-secondary-fixed-variant": "#5d4200",
+                        "surface-container-high": "#e6e9e8",
+                        "on-primary-container": "#f5fff6",
+                        "primary-fixed": "#8ef7c4",
+                        "surface-dim": "#d8dada",
+                        "primary-fixed-dim": "#72daa9",
+                        "tertiary-container": "#db313f",
+                        "surface": "#f8faf9",
+                        "on-tertiary-fixed": "#410007"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "lg": "48px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf9; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .ambient-shadow-l1 { box-shadow: 0 2px 4px rgba(15, 138, 95, 0.05); }
+        .ambient-shadow-l2 { box-shadow: 0 6px 12px rgba(15, 138, 95, 0.08); }
+        .otp-input:focus { border-color: #006947; box-shadow: 0 0 0 2px rgba(0, 105, 71, 0.1); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- Top AppBar Component -->
+<header class="bg-surface dark:bg-background shadow-sm dark:shadow-none fixed top-0 w-full z-50 px-margin-mobile md:px-margin-desktop py-base flex justify-between items-center h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:opacity-90 active:scale-95 duration-200">arrow_back</button>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Food Rescue Hero</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-on-surface-variant font-label-md">Need help?</span>
+<span class="material-symbols-outlined text-primary">contact_support</span>
+</div>
+</header>
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto min-h-screen">
+<!-- Step Indicator -->
+<div class="mb-md">
+<div class="flex justify-between items-end mb-2">
+<p class="font-label-md text-primary uppercase tracking-wider">Step 1 of 5</p>
+<p class="font-headline-md text-on-surface">Account Creation</p>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/5 transition-all duration-500 ease-out"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Form -->
+<div class="lg:col-span-8 space-y-md">
+<section class="bg-surface-container-lowest p-md rounded-xl ambient-shadow-l1">
+<h2 class="font-headline-md text-on-surface mb-sm">Basic Information</h2>
+<div class="space-y-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-on-surface-variant">Restaurant Owner Full Name</label>
+<input id="ownerNameInput" class="w-full bg-surface-bright border border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="John Doe" type="text">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-on-surface-variant">Restaurant Email</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" id="emailInput" placeholder="owner@restaurant.com" type="email">
+<button class="absolute right-2 top-1.5 bg-primary text-on-primary px-4 py-1.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all hidden" id="verifyBtn" onclick="sendOTP()">
+                                    Verify Email
+                                </button>
+</div>
+</div><!-- New OTP Verification Section -->
+<div class="mt-md p-md bg-surface-container-low border border-outline-variant rounded-xl space-y-md" id="otpSection"><div class="flex flex-col gap-4"><div class="flex justify-between items-center"><span class="font-label-md text-on-surface-variant">Enter 6-digit Verification Code sent to email</span><span class="font-label-md font-bold text-primary" id="countdown">Resend OTP in 10s</span></div><div class="flex justify-between gap-2 max-w-xs flex-wrap"><input class="otp-input h-14 text-center text-headline-md font-bold bg-surface-bright border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none w-10" maxlength="1" type="text"><input class="otp-input h-14 text-center text-headline-md font-bold bg-surface-bright border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none w-10" maxlength="1" type="text"><input class="otp-input h-14 text-center text-headline-md font-bold bg-surface-bright border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none w-10" maxlength="1" type="text"><input class="otp-input h-14 text-center text-headline-md font-bold bg-surface-bright border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none w-10" maxlength="1" type="text"><input class="otp-input h-14 text-center text-headline-md font-bold bg-surface-bright border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none w-10" maxlength="1" type="text"><input class="otp-input h-14 text-center text-headline-md font-bold bg-surface-bright border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none w-10" maxlength="1" type="text"></div><button class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-md shadow-sm hover:opacity-90 active:scale-95 transition-all" onclick="verifyOTP()">Verify OTP</button></div></div>
+
+<!-- New Success State -->
+<div class="hidden mt-md flex items-center gap-3 p-4 bg-primary/10 text-primary border border-primary/20 rounded-xl" id="successBadge"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span><span class="font-label-md">Email Verified Successfully</span></div>
+</div>
+<!-- Email Verification Card (Hidden initially) -->
+
+<!-- Success Badge -->
+
+</section>
+<!-- Security Section -->
+<section class="bg-surface-container-lowest p-md rounded-xl ambient-shadow-l1 space-y-md">
+<h2 class="font-headline-md text-on-surface mb-sm">Security</h2>
+<div class="space-y-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-on-surface-variant">Password</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" id="pwd" oninput="checkStrength(this.value)" placeholder="••••••••" type="password">
+<span class="material-symbols-outlined absolute right-4 top-3 text-outline cursor-pointer hover:text-primary transition-colors" onclick="togglePassword('pwd')">visibility</span>
+</div>
+<!-- Strength Meter -->
+<div class="mt-2 space-y-1">
+<div class="flex gap-1 h-1.5">
+<div class="flex-1 bg-surface-container rounded-full transition-colors" id="s1"></div>
+<div class="flex-1 bg-surface-container rounded-full transition-colors" id="s2"></div>
+<div class="flex-1 bg-surface-container rounded-full transition-colors" id="s3"></div>
+<div class="flex-1 bg-surface-container rounded-full transition-colors" id="s4"></div>
+</div>
+<p class="font-label-sm text-outline" id="strengthLabel">Enter a strong password</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-on-surface-variant">Confirm Password</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" id="pwd-confirm" placeholder="••••••••" type="password">
+<span class="material-symbols-outlined absolute right-4 top-3 text-outline cursor-pointer hover:text-primary transition-colors" onclick="togglePassword('pwd-confirm')">visibility</span>
+</div>
+</div>
+</div>
+</section>
+<button class="w-full bg-primary text-on-primary font-label-md py-4 rounded-xl shadow-lg opacity-50 cursor-not-allowed transform active:scale-95 transition-all" disabled="" id="mainContinueBtn" onclick="submitStep1()">
+                    Continue to Restaurant Details
+                </button>
+</div>
+<!-- Right Column: Context/Visual -->
+<div class="hidden lg:block lg:col-span-4 space-y-md">
+<div class="bg-primary p-md rounded-xl text-on-primary space-y-sm">
+<h3 class="font-headline-md">Why Join Us?</h3>
+<ul class="space-y-base font-body-md opacity-90">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary-fixed">compost</span>
+                            Reduce food waste footprint.
+                        </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary-fixed">volunteer_activism</span>
+                            Support local community food banks.
+                        </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary-fixed">receipt_long</span>
+                            Get automated tax deduction logs.
+                        </li>
+</ul>
+</div>
+<div class="relative h-64 w-full rounded-xl overflow-hidden ambient-shadow-l1">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, high-quality photograph of a vibrant local kitchen team smiling while packing fresh produce into eco-friendly rescue containers. The lighting is warm and natural, suggesting a hopeful and community-driven atmosphere. Deep greens and soft whites dominate the scene to match the Food Rescue Hero brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlISAqNXJujoLIwuqibfhVPdSCgrhba3Pw5165tRI_TpDv49x5BdQuCLLxxXKbivaT4e_RQDiPHT7QF4mq5aHyHcnf7FPDNKZycNxRWPtdfOBSOR16N8i0OqPO98_1iDo-jbmbGw92rLmD3EjBHWPDeewXisk4iVP8d3Jto3_dI4Kg9YLsiHcdONy_l-MNz8ngmW2USPZhn2JceB0oH53YJMbcJ7WyCspyScRYqidi9_zR4seFVsL9bBb7KKejY1VvC5UvJw8XNng')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<p class="absolute bottom-4 left-4 right-4 text-white font-label-md">Join 500+ restaurants making a difference today.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav for Mobile Context -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container shadow-[0_-4px_12px_rgba(15,138,95,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" data-weight="fill">assignment_ind</span>
+<span class="font-label-sm">Registration</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm">Help</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm">Contact</span>
+</a>
+</nav>
+<script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function sendOTP() {
+            const email = document.getElementById('emailInput').value;
+            if(!email) return alert('Please enter an email first');
+            
+            const btn = document.getElementById('verifyBtn');
+            btn.disabled = true;
+            btn.innerHTML = 'Sending...';
+            
+            setTimeout(() => {
+                document.getElementById('otpSection').classList.remove('hidden');
+                btn.classList.add('hidden');
+                startCountdown();
+            }, 800);
+        }
+
+        function startCountdown() {
+            let count = 10;
+            const timerEl = document.getElementById('countdown');
+            const interval = setInterval(() => {
+                count--;
+                timerEl.innerText = `Resend in ${count}s`;
+                if(count === 0) {
+                    clearInterval(interval);
+                    timerEl.innerText = "Resend OTP";
+                    timerEl.classList.add('text-primary', 'cursor-pointer');
+                }
+            }, 1000);
+        }
+
+        function verifyOTP() {
+            // Mock verification
+            document.getElementById('otpSection').classList.add('hidden');
+            document.getElementById('successBadge').classList.remove('hidden');
+            
+            const mainBtn = document.getElementById('mainContinueBtn');
+            mainBtn.disabled = false;
+            mainBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            mainBtn.classList.add('hover:opacity-90', 'active:scale-95');
+        }
+
+        function checkStrength(val) {
+            const bars = [document.getElementById('s1'), document.getElementById('s2'), document.getElementById('s3'), document.getElementById('s4')];
+            const label = document.getElementById('strengthLabel');
+            
+            // Reset
+            bars.forEach(b => b.className = 'flex-1 bg-surface-container rounded-full transition-colors');
+            
+            if(!val) {
+                label.innerText = 'Enter a strong password';
+                return;
+            }
+
+            let score = 0;
+            if(val.length > 6) score++;
+            if(val.length > 10) score++;
+            if(/[A-Z]/.test(val)) score++;
+            if(/[0-9]/.test(val) || /[^A-Za-z0-9]/.test(val)) score++;
+
+            const colors = ['bg-tertiary', 'bg-secondary', 'bg-primary-container', 'bg-primary'];
+            const labels = ['Weak', 'Fair', 'Good', 'Strong'];
+
+            for(let i=0; i<score; i++) {
+                bars[i].classList.remove('bg-surface-container');
+                bars[i].classList.add(colors[score-1]);
+            }
+            label.innerText = labels[score-1] || 'Weak';
+        }
+
+        // Auto-focus OTP fields
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.oninput = (e) => {
+                if (e.target.value && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            };
+            input.onkeydown = (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            };
+        });
+
+        async function submitStep1() {
+            const btn = document.getElementById('mainContinueBtn');
+            const ownerName = document.getElementById('ownerNameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('pwd').value;
+            
+            if (!ownerName || !email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            try {
+                btn.innerHTML = 'Creating Account... <span class="material-symbols-outlined animate-spin">sync</span>';
+                btn.disabled = true;
+
+                const response = await ApiClient.post('/auth/register', {
+                    email: email,
+                    password: password,
+                    role: 'restaurant',
+                    deviceId: navigator.userAgent
+                });
+
+                ApiClient.setToken(response.data?.tokens?.accessToken || response.data?.accessToken);
+                localStorage.setItem('foodRescueUser', JSON.stringify(response.data?.user || response.data));
+                
+                // Store owner name to carry over
+                let regData = JSON.parse(localStorage.getItem('restaurant_reg_data') || '{}');
+                regData.ownerName = ownerName;
+                localStorage.setItem('restaurant_reg_data', JSON.stringify(regData));
+
+                window.location.href = '2_Restaurant_Registration_Step_2.html';
+            } catch(error) {
+                alert(error.message || "Failed to create account.");
+                btn.innerHTML = 'Continue to Restaurant Details';
+                btn.disabled = false;
+            }
+        }
+    </script>
+    <script src="js/api.js"></script>
+
+
+</body></html>

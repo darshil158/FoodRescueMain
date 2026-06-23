@@ -3,12 +3,12 @@ const { sendEmail } = require('../../config/email');
 const bcrypt = require('bcryptjs');
 
 const OTP_COLLECTION = 'otps';
-const OTP_EXPIRY_MINS = 10;
+const OTP_EXPIRY_MINS = 5;
 
 // ─── Generate cryptographically safe 6-digit OTP ─────────────────────────────
 function generateOTP() {
   const crypto = require('crypto');
-  return String(100000 + (crypto.randomInt(900000)));
+  return String(crypto.randomInt(100000, 1000000));
 }
 
 // ─── Email HTML templates ─────────────────────────────────────────────────────
@@ -76,11 +76,31 @@ function buildOtpEmail(otp, purpose = 'login') {
 
 // ─── Store OTP in Firestore (one record per email+purpose) ────────────────────
 async function storeOTP(email, otp, purpose) {
+  const docId = `${email}_${purpose}`;
+  const ref = db.collection(OTP_COLLECTION).doc(docId);
+  
+  // Track resend requests (max 3 per hour)
+  const doc = await ref.get();
+  let resendCount = 1;
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+  
+  if (doc.exists) {
+    const data = doc.data();
+    if (data.createdAt && data.createdAt.toDate() > oneHourAgo) {
+      resendCount = (data.resendCount || 0) + 1;
+      if (resendCount > 3) {
+        throw new Error('Too many OTP requests. Please try again in an hour.');
+      }
+    }
+  }
+
   const expiresAt = new Date(Date.now() + OTP_EXPIRY_MINS * 60 * 1000);
-  await db.collection(OTP_COLLECTION).doc(`${email}_${purpose}`).set({
+  await ref.set({
     email, otp, purpose,
     expiresAt, used: false,
     createdAt: new Date(),
+    resendCount,
+    attempts: 0
   });
 }
 
@@ -91,11 +111,17 @@ async function verifyOTP(email, otp, purpose) {
 
   if (!doc.exists)               throw new Error('OTP not found. Please request a new one.');
   const data = doc.data();
+  
+  if (data.attempts >= 5)        throw new Error('Too many failed attempts. Please request a new OTP.');
   if (data.used)                 throw new Error('OTP already used. Please request a new one.');
   if (new Date() > data.expiresAt.toDate()) throw new Error('OTP has expired. Please request a new one.');
-  if (data.otp !== String(otp))  throw new Error('Incorrect OTP. Please try again.');
+  
+  if (data.otp !== String(otp)) {
+    await ref.update({ attempts: (data.attempts || 0) + 1 });
+    throw new Error('Incorrect OTP. Please try again.');
+  }
 
-  await ref.update({ used: true });
+  await ref.update({ used: true, attempts: (data.attempts || 0) + 1 });
   return true;
 }
 
@@ -173,11 +199,24 @@ async function resetPasswordWithOTP(email, otp, newPassword) {
   const snap = await db.collection('users').where('email', '==', normEmail).limit(1).get();
   if (snap.empty) throw new Error('User not found.');
 
+  const userDoc = snap.docs[0];
+  const uid = userDoc.id;
+
   // Store as passwordHash to match login service
-  await snap.docs[0].ref.update({
+  await userDoc.ref.update({
     passwordHash: hashed,
     updatedAt: new Date(),
   });
+
+  // Revoke all active sessions for this user to prevent Session Hijacking persistence
+  const sessionsSnap = await db.collection('sessions').where('userId', '==', uid).get();
+  const batch = db.batch();
+  sessionsSnap.docs.forEach(doc => {
+    batch.delete(doc.ref);
+  });
+  if (!sessionsSnap.empty) {
+    await batch.commit();
+  }
 
   return { message: 'Password reset successfully. Please log in with your new password.' };
 }
