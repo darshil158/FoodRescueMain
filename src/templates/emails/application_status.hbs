@@ -1,0 +1,34 @@
+{{> header}}
+  <div class="tag {{#if isApproved}}tag-primary{{else if isSuspended}}tag-warning{{else}}tag-tertiary{{/if}}">ACCOUNT STATUS</div>
+  <h1>{{title}} {{#if isApproved}}🎉{{else if isSuspended}}⚠️{{else}}❌{{/if}}</h1>
+  <p>Hi <span class="highlight">{{name}}</span>,</p>
+  
+  {{#if isApproved}}
+    <p>Great news! Your application to become a <strong>{{role}}</strong> has been officially approved by our admin team.</p>
+    <p>You can now log in to the FoodRescue platform and access all your dashboard features. Start making an impact today!</p>
+    <a href="{{dashboardUrl}}" style="display: block; width: 100%; padding: 16px 0; background-color: #006e2f; color: #ffffff; font-weight: 600; text-decoration: none; border-radius: 12px; text-align: center; font-size: 16px; margin-bottom: 24px;">Go to Dashboard</a>
+  {{/if}}
+
+  {{#if isRejected}}
+    <p>We have reviewed your application to join FoodRescue as a <strong>{{role}}</strong>.</p>
+    <p>Unfortunately, we are unable to approve your application at this time.</p>
+    {{#if reason}}
+      <div style="background-color: #ffdad6; padding: 16px; border-radius: 8px; text-align: left; margin: 24px 0;">
+        <p style="font-weight: 700; color: #ba1a1a; margin-bottom: 4px;">Reason:</p>
+        <p style="color: #ba1a1a; margin-bottom: 0;">{{reason}}</p>
+      </div>
+    {{/if}}
+    <p>If you believe this is a mistake, please reply to this email or contact support.</p>
+  {{/if}}
+
+  {{#if isSuspended}}
+    <p>Your FoodRescue account has been temporarily suspended.</p>
+    {{#if reason}}
+      <div style="background-color: #fff8f0; border-left: 4px solid #fd761a; padding: 16px; border-radius: 8px; text-align: left; margin: 24px 0;">
+        <p style="font-weight: 700; color: #783200; margin-bottom: 4px;">Reason for suspension:</p>
+        <p style="color: #783200; margin-bottom: 0;">{{reason}}</p>
+      </div>
+    {{/if}}
+    <p>Please contact our support team immediately to resolve this issue and reactivate your account.</p>
+  {{/if}}
+{{> footer}}

@@ -1,0 +1,41 @@
+{{> header}}
+  <div class="tag tag-primary">IMPACT UPDATE</div>
+  <h1>Donation Completed! 🎉</h1>
+  <p>Hi <span class="highlight">{{name}}</span>,</p>
+  <p>Your recent food donation has been successfully delivered and completed. Thank you for your incredible contribution!</p>
+  
+  <div style="background-color: #eff4ff; border: 1px solid #bccbb9; border-radius: 16px; padding: 24px; margin: 24px 0;">
+    <h2 style="font-size: 20px; font-weight: 600; color: #006e2f; margin-bottom: 16px;">Impact Summary</h2>
+    
+    <table style="width: 100%; border-collapse: collapse;">
+      <tr>
+        <td style="padding: 12px 0; border-bottom: 1px solid #dce9ff;">
+          <strong style="color: #0b1c30;">Meals Served:</strong>
+        </td>
+        <td style="padding: 12px 0; text-align: right; border-bottom: 1px solid #dce9ff; font-weight: 700; color: #006e2f;">
+          {{mealsServed}}
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 12px 0; border-bottom: 1px solid #dce9ff;">
+          <strong style="color: #0b1c30;">Families Helped:</strong>
+        </td>
+        <td style="padding: 12px 0; text-align: right; border-bottom: 1px solid #dce9ff; font-weight: 700; color: #006e2f;">
+          {{familiesHelped}}
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 12px 0;">
+          <strong style="color: #0b1c30;">CO₂ Saved:</strong>
+        </td>
+        <td style="padding: 12px 0; text-align: right; font-weight: 700; color: #006e2f;">
+          {{co2Saved}} kg
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <p>Every meal you donate helps us build a zero-hunger, zero-waste community. Keep up the amazing work!</p>
+  
+  <a href="{{dashboardUrl}}" style="display: block; width: 100%; padding: 16px 0; background-color: #006e2f; color: #ffffff; font-weight: 600; text-decoration: none; border-radius: 12px; text-align: center; font-size: 16px; margin-top: 24px;">View Full Impact Report</a>
+{{> footer}}

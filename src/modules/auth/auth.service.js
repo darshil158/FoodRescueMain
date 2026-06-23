@@ -81,8 +81,12 @@ class AuthService {
     try {
       const OTPService = require('./otp.service');
       await OTPService.sendVerifyOTP(normEmail);
+      
+      // Send Welcome Email
+      const EmailService = require('../email/email.service');
+      await EmailService.sendWelcomeEmail(normEmail, normEmail.split('@')[0], role || 'volunteer', user.uid);
     } catch (e) {
-      console.warn('Verification email failed (non-fatal):', e.message);
+      console.warn('Verification/Welcome email failed (non-fatal):', e.message);
     }
 
     return {
@@ -148,6 +152,14 @@ class AuthService {
         createdAt: new Date()
       };
       await newUserRef.set(user);
+
+      // Send Welcome Email
+      try {
+        const EmailService = require('../email/email.service');
+        await EmailService.sendWelcomeEmail(email, email.split('@')[0], role || 'volunteer', newUserRef.id);
+      } catch (e) {
+        console.warn('Welcome email failed (non-fatal):', e.message);
+      }
     } else {
       user = snapshot.docs[0].data();
       if (user.status === 'BANNED') throw new Error('Account banned');

@@ -20,6 +20,7 @@ const adminRoutes = require('./modules/admin/admin.routes');
 const analyticsRoutes = require('./modules/analytics/analytics.routes');
 const complaintRoutes = require('./modules/complaint/complaint.routes');
 const deliveryRoutes = require('./modules/delivery/delivery.routes');
+const emailRoutes = require('./modules/email/email.routes');
 
 const app = express();
 
@@ -67,6 +68,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/delivery', deliveryRoutes);
+app.use('/api/email', emailRoutes);
 
 // ─── 404 Handler ────────────────────────────────────────────────────────────
 app.use('*', (req, res) => {

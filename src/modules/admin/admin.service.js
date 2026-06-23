@@ -36,6 +36,21 @@ class AdminService {
       updatedAt: new Date() 
     });
 
+    // Send Application Status Email
+    try {
+      const EmailService = require('../email/email.service');
+      const userData = userDoc.data();
+      await EmailService.sendApplicationStatus(
+        userData.email, 
+        userData.email.split('@')[0], 
+        userData.role, 
+        newStatus, 
+        null // We don't have a reason stored in this basic function yet, but can be added later
+      );
+    } catch (e) {
+      console.warn('Status email failed (non-fatal):', e.message);
+    }
+
     // If banned or suspended, instantly nuke all their active sessions
     if (newStatus === 'BANNED' || newStatus === 'SUSPENDED') {
       await this.revokeAllUserSessions(adminUid, targetUid, ipAddress, true);

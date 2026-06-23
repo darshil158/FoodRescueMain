@@ -1,0 +1,29 @@
+{{> header}}
+  <div class="tag tag-primary">NEW PARTNER</div>
+  <h1>Welcome to FoodRescue 🍽️</h1>
+  <p>Hey <span class="highlight">{{name}}</span>, ready to flip the script on food waste? Your kitchen isn't just making meals anymore—it's fueling a movement.</p>
+  
+  <div style="background-color: #eff4ff; padding: 16px; border-radius: 12px; text-align: left; border: 1px solid #bccbb9; margin-bottom: 24px;">
+    <p style="font-size: 20px; font-weight: 600; color: #006e2f; margin-bottom: 8px;">The Real Tea on Waste</p>
+    <p style="font-size: 14px; color: #3d4a3d; font-style: italic; margin-bottom: 0;">"A chef's legacy is often measured in the plates they serve, but at FoodRescue, we measure it by the plates we save. Every surplus tray is a second chance for someone in our community."</p>
+  </div>
+
+  <table style="width: 100%; margin-bottom: 24px; border-collapse: separate; border-spacing: 16px 0;">
+    <tr>
+      <td style="background-color: #f8f9ff; border: 1px solid #bccbb9; padding: 16px; border-radius: 12px; text-align: center; width: 50%;">
+        <span style="font-size: 28px; font-weight: 700; color: #9d4300; display: block; margin-bottom: 4px;">40%</span>
+        <span style="font-size: 12px; font-weight: 600; color: #3d4a3d; opacity: 0.6; text-transform: uppercase;">Food Wasted Globally</span>
+      </td>
+      <td style="background-color: #f8f9ff; border: 1px solid #bccbb9; padding: 16px; border-radius: 12px; text-align: center; width: 50%;">
+        <span style="font-size: 28px; font-weight: 700; color: #006e2f; display: block; margin-bottom: 4px;">12k+</span>
+        <span style="font-size: 12px; font-weight: 600; color: #3d4a3d; opacity: 0.6; text-transform: uppercase;">Meals Saved Weekly</span>
+      </td>
+    </tr>
+  </table>
+
+  <a href="{{dashboardUrl}}" style="display: block; width: 100%; padding: 16px 0; background-color: #006e2f; color: #ffffff; font-weight: 600; text-decoration: none; border-radius: 12px; text-align: center; font-size: 16px;">Open Your Dashboard</a>
+  
+  {{#if applicationId}}
+  <p style="margin-top: 24px; font-size: 11px; color: #6d7b6c; text-align: center;">Application ID: {{applicationId}}</p>
+  {{/if}}
+{{> footer}}

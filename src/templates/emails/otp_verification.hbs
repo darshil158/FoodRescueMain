@@ -1,0 +1,17 @@
+{{> header}}
+  <div class="tag tag-primary">SECURITY ACTION</div>
+  <h1>{{title}} 🔐</h1>
+  <p>Hi <span class="highlight">{{name}}</span>,</p>
+  <p>Use the one-time password (OTP) below to {{action}}. This code is valid for <strong>{{expiryMins}} minutes</strong>.</p>
+  
+  <div style="background-color: #f4fbf4; border: 2px dashed #006e2f; border-radius: 16px; padding: 24px 40px; margin: 24px auto; display: inline-block;">
+    <div style="font-family: 'Courier New', Courier, monospace; font-size: 44px; font-weight: 800; color: #006e2f; letter-spacing: 14px; line-height: 1; margin-bottom: 10px;">{{otp}}</div>
+    <div style="color: #6d7b6c; font-size: 12px;">⏱ Expires in {{expiryMins}} minutes</div>
+  </div>
+
+  <p>Enter this code in the app to complete your request. Do <strong>not</strong> share this code with anyone.</p>
+  
+  <div style="background-color: #fff8f0; border-left: 4px solid #fd761a; border-radius: 8px; padding: 14px 18px; text-align: left; margin-top: 24px;">
+    <p style="color: #783200; font-size: 13px; line-height: 1.5; margin: 0;">⚠️ <strong>FoodRescue will never call or message you to ask for this code.</strong> If you didn't request this, please ignore this email and your account will remain secure.</p>
+  </div>
+{{> footer}}

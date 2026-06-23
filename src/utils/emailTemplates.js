@@ -135,15 +135,22 @@ const forgotPasswordEmail = (displayName, resetLink) => {
  * @param {string} otp         - 6-digit OTP code
  * @param {number} expiryMins  - Minutes until OTP expires (default 10)
  */
-const otpEmail = (displayName, otp, expiryMins = 10) => {
+const otpEmail = (displayName, otp, purpose = 'login', expiryMins = 10) => {
+  const configs = {
+    login: { title: 'Your Login Code 🔐', text: 'log in to your FoodRescue account' },
+    register: { title: 'Verify Your Email ✉️', text: 'verify your email address' },
+    reset: { title: 'Reset Password Code 🔐', text: 'reset your FoodRescue password' }
+  };
+  const { title, text } = configs[purpose] || configs.login;
+
   const html = wrap(`
-    <h2>Verify Your Email ✉️</h2>
+    <h2>${title}</h2>
     <p>Hi <span class="highlight">${displayName}</span>,</p>
-    <p>Use the one-time password (OTP) below to verify your email address. This code is valid for <strong>${expiryMins} minutes</strong>.</p>
+    <p>Use the one-time password (OTP) below to ${text}. This code is valid for <strong>${expiryMins} minutes</strong>.</p>
     <div style="text-align: center;">
       <div class="otp-box">${otp}</div>
     </div>
-    <p>Enter this code in the app to complete your verification. Do <strong>not</strong> share this code with anyone.</p>
+    <p>Enter this code in the app to complete your request. Do <strong>not</strong> share this code with anyone.</p>
     <hr class="divider" />
     <p style="font-size: 13px; color: #6c7a71;">
       If you didn't request this code, please ignore this email or contact our support team immediately.
@@ -151,9 +158,50 @@ const otpEmail = (displayName, otp, expiryMins = 10) => {
   `);
 
   return {
-    subject: `${otp} — Your FoodRescue verification code`,
+    subject: `${otp} — Your FoodRescue code`,
     html,
   };
 };
 
-module.exports = { welcomeEmail, forgotPasswordEmail, otpEmail };
+// ─── Application Submitted Email ────────────────────────────────────────────────
+const applicationSubmittedEmail = (displayName, role) => {
+  const html = wrap(`
+    <h2>Application Received! 📝</h2>
+    <p>Hi <span class="highlight">${displayName}</span>,</p>
+    <p>Thank you for submitting your application to join FoodRescue as a <strong>${role}</strong>.</p>
+    <p>Our admin team is currently reviewing your details and documentation. This process usually takes 24-48 hours. Once approved, you will receive another email and gain full access to the platform.</p>
+    <hr class="divider" />
+    <p style="font-size: 13px; color: #6c7a71;">
+      If we need any further information, we will contact you directly. Thank you for your patience!
+    </p>
+  `);
+
+  return {
+    subject: 'Your FoodRescue Application is Under Review 📝',
+    html,
+  };
+};
+
+// ─── Application Approved Email ─────────────────────────────────────────────────
+const applicationApprovedEmail = (displayName, role) => {
+  const html = wrap(`
+    <h2>Application Approved! 🎉</h2>
+    <p>Hi <span class="highlight">${displayName}</span>,</p>
+    <p>Great news! Your application to become a <strong>${role}</strong> has been officially approved by our admin team.</p>
+    <p>You can now log in to the FoodRescue platform and access all your dashboard features. Start making an impact today!</p>
+    <div style="text-align: center; margin: 24px 0;">
+      <a class="btn" href="${process.env.ALLOWED_ORIGINS || 'https://foodsrescue.vercel.app'}">Go to Dashboard</a>
+    </div>
+    <hr class="divider" />
+    <p style="font-size: 13px; color: #6c7a71;">
+      Welcome to the community! Together, we're fighting hunger and reducing food waste. 🌱
+    </p>
+  `);
+
+  return {
+    subject: 'Welcome! Your FoodRescue Application is Approved 🎉',
+    html,
+  };
+};
+
+module.exports = { welcomeEmail, forgotPasswordEmail, otpEmail, applicationSubmittedEmail, applicationApprovedEmail };
