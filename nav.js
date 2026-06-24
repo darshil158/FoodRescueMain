@@ -13,8 +13,8 @@
     'register':                 '2_role_selection.html',
 
     // Role selection → Registration
-    'restaurant / hotel':       '3_restaurant_registration.html',
-    'ngo':                      '5_ngo_registration.html',
+    'restaurant / hotel':       '1_Restaurant_Registration_Step_1.html',
+    'ngo':                      '1_NGO_Registration_Step_1.html',
     'volunteer':                '6_volunteer_registration.html',
 
     // Registration → Login
@@ -199,8 +199,8 @@
           const sel = document.querySelector('.card-selected h3');
           if (!sel) { alert('Please select a role first!'); return; }
           const roleText = sel.textContent.toLowerCase();
-          if (roleText.includes('restaurant')) navigateTo('3_restaurant_registration.html');
-          else if (roleText.includes('ngo'))   navigateTo('5_ngo_registration.html');
+          if (roleText.includes('restaurant')) navigateTo('1_Restaurant_Registration_Step_1.html');
+          else if (roleText.includes('ngo'))   navigateTo('1_NGO_Registration_Step_1.html');
           else                                  navigateTo('6_volunteer_registration.html');
           return;
         }
@@ -216,7 +216,7 @@
       }
 
       // Special: registration forms — any submit/create → login
-      if (['3_restaurant_registration.html', '5_ngo_registration.html', '6_volunteer_registration.html'].includes(currentFile)) {
+      if (['5_Restaurant_Registration_Step_5.html', '5_NGO_Registration_Step_5.html', '6_volunteer_registration.html'].includes(currentFile)) {
         if (text.toLowerCase().includes('register') || text.toLowerCase().includes('create') || text.toLowerCase().includes('submit') || el.type === 'submit') {
           e.preventDefault();
           navigateTo('4_login_and_verification.html');
