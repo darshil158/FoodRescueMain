@@ -19,6 +19,14 @@ test.describe('Auth QA - Login, OTP, Password Reset', () => {
   });
 
   test('Password Reset Flow', async ({ page }) => {
+    // Mock API responses
+    await page.route('**/api/auth/forgot-password', async route => {
+      await route.fulfill({ status: 200, json: { message: 'Reset code sent' } });
+    });
+    await page.route('**/api/auth/reset-password', async route => {
+      await route.fulfill({ status: 200, json: { message: 'Password reset' } });
+    });
+
     await page.goto('/4_login_and_verification.html');
 
     // Open Forgot Password Modal

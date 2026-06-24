@@ -1,6 +1,13 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('Admin Approval QA', () => {
+  test.beforeEach(async ({ page }) => {
+    // Add fake token to prevent redirect
+    await page.goto('/');
+    await page.evaluate(() => {
+      window.localStorage.setItem('foodRescueToken', 'fake-token-123');
+    });
+  });
 
   test('Approve Verification Request', async ({ page }) => {
     await page.goto('/15_verification_management.html');
