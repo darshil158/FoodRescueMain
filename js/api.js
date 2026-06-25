@@ -1,10 +1,10 @@
-const API_BASE_URL = 'https://foodrescue-jhyr.onrender.com/api';
+var API_BASE_URL = 'https://foodrescue-jhyr.onrender.com/api';
 
 /**
  * Global API Utility for FoodRescue
  * Automatically attaches JWT Bearer tokens to requests and handles common errors.
  */
-class ApiClient {
+var ApiClient = class {
     static getToken() {
         return localStorage.getItem('foodRescueToken');
     }

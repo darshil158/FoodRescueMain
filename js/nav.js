@@ -16,6 +16,7 @@ const PAGES = {
   volunteerDashboard:  '9_volunteer_dashboard.html',
   ngoDashboard:        '10_ngo_dashboard.html',
   notifications:       '11_notifications.html',
+  'verification management':  '15_verification_management.html',
   profile:             '12_profile.html',
   analytics:           '13_impact_analytics.html',
   chat:                '14_chat_and_coordination.html',

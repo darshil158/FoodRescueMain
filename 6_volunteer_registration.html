@@ -188,7 +188,6 @@
 <button type="button" class="absolute right-2 top-2 bg-primary text-on-primary px-4 py-1.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all" id="verifyBtn" onclick="sendOTP()">Verify Email</button>
 </div>
 </div>
-
 <div class="hidden mt-4 p-4 bg-surface-container-low border border-outline-variant rounded-xl md:col-span-2 space-y-4" id="otpSection">
   <div class="flex flex-col gap-4">
     <div class="flex justify-between items-center">
@@ -396,8 +395,9 @@
         });
 
         const submitBtn = document.getElementById('mainContinueBtn');
-        submitBtn.addEventListener('click', async (e) => {
+        submitBtn.onclick = async (e) => {
             e.preventDefault();
+            console.log('VOLUNTEER SUBMIT CLICKED');
             
             const nameEl = document.getElementById('vol-name');
             const emailEl = document.getElementById('vol-email');
@@ -434,7 +434,7 @@
               submitBtn.innerHTML = 'Submit For Verification';
               submitBtn.disabled = false;
             }
-        });
+        };
     </script>
 <script src="map-picker.js"></script><script>document.addEventListener("DOMContentLoaded",function(){var c=document.getElementById("vol-addr-container");if(c)c.innerHTML=buildAddressHTML("vol");initCountryDropdown("vol");initLiveTracking("fr-tracking-map");});</script><script src="nav.js"></script><script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-</script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
+</script><script src="js/nav.js"></script></body></html>
 
 
 

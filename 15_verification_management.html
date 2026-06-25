@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
@@ -138,7 +138,7 @@
 <p class="font-label-md text-label-md text-on-surface-variant opacity-70">12 applications awaiting review</p>
 </div>
 <!-- Filter Tabs -->
-<div class="flex border-b border-outline-variant mb-stack-md overflow-x-auto no-scrollbar gap-gutter">
+<div id="adminTabs" class="flex border-b border-outline-variant mb-stack-md overflow-x-auto no-scrollbar gap-gutter">
 <button class="pb-stack-sm font-label-lg text-label-lg whitespace-nowrap active-tab">Restaurants</button>
 <button class="pb-stack-sm font-label-lg text-label-lg whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors">NGOs</button>
 <button class="pb-stack-sm font-label-lg text-label-lg whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors">Volunteers</button>
@@ -278,17 +278,20 @@
         });
 
         // Tab Switching Simulation
-        const tabs = document.querySelectorAll('.flex.border-b button');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => {
-                    t.classList.remove('active-tab');
-                    t.classList.add('text-on-surface-variant');
+        const tabsContainer = document.getElementById('adminTabs');
+        if(tabsContainer) {
+            const tabs = tabsContainer.querySelectorAll('button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('active-tab');
+                        t.classList.add('text-on-surface-variant');
+                    });
+                    tab.classList.add('active-tab');
+                    tab.classList.remove('text-on-surface-variant');
                 });
-                tab.classList.add('active-tab');
-                tab.classList.remove('text-on-surface-variant');
             });
-        });
+        }
     </script>
 <script src="js/api.js"></script><script>document.addEventListener("DOMContentLoaded",()=>{if(!localStorage.getItem("foodRescueToken")){window.location.href="27_admin_login_command_center.html";return;}ApiClient.get("/admin/approvals/restaurant").then(d=>console.log("Verification loaded:",d?.data)).catch(e=>console.warn("Verification",e.message));});</script><script src="nav.js"></script><script src="js/api.js"></script><script>document.addEventListener("DOMContentLoaded",()=>{if(!localStorage.getItem("foodRescueToken")){window.location.href="27_admin_login_command_center.html";return;}ApiClient.get("/admin/approvals/restaurant").then(d=>console.log("Verification loaded:",d?.data)).catch(e=>console.warn("Verification",e.message));});</script><script src="js/api.js"></script><script src="js/nav.js"></script></body></html>
 

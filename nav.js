@@ -20,13 +20,11 @@
     // Registration → Login
     'sign up':                  '4_login_and_verification.html',
     'create account':           '4_login_and_verification.html',
-    'submit':                   '4_login_and_verification.html',
     'already have an account':  '4_login_and_verification.html',
     'log in':                   '4_login_and_verification.html',
 
     // Login → Dashboards (role-aware via localStorage)
-    'send otp':                 '_otp_flow',
-    'verify':                   '_dashboard_redirect',
+    // Login → Dashboards (role-aware via localStorage)
 
     // Restaurant Dashboard actions
     'donate food':              '8_create_food_donation.html',
@@ -52,7 +50,7 @@
     'settings':                 '12_profile.html',
 
     // Admin links
-    'verification':             '15_verification_management.html',
+    'verification management':  '15_verification_management.html',
     'donation monitoring':      '16_donation_monitoring.html',
     'user management':          '17_user_management_admin.html',
     'csr':                      '18_csr_and_reporting.html',
@@ -192,6 +190,7 @@
 
       // Skip elements that already have real navigation or internal logic
       if (href && href !== '#' && !href.startsWith('javascript')) return;
+      if (el.hasAttribute('onclick')) return;
 
       // Special: role selection → save role then navigate
       if (currentFile === '2_role_selection.html') {
@@ -209,14 +208,7 @@
         }
       }
 
-      // Special: login screen — verify button → dashboard
-      if (currentFile === '4_login_and_verification.html') {
-        if (text.toLowerCase().includes('verify')) {
-          // Let the existing OTP animation run, then redirect
-          setTimeout(() => navigateTo(ROLE_DASHBOARD[getRole()]), 2500);
-          return;
-        }
-      }
+
 
       // Special: registration forms — any submit/create → login
       if (['5_Restaurant_Registration_Step_5.html', '5_NGO_Registration_Step_5.html', '6_volunteer_registration.html'].includes(currentFile)) {

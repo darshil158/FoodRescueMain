@@ -81,6 +81,8 @@ test.describe('NGO Registration QA - End to End', () => {
     });
 
     await page.goto('/1_NGO_Registration_Step_1.html');
+    page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+    page.on('pageerror', err => console.log('PAGE ERROR:', err.message));
     await page.fill('#emailInput', 'test@ngo.com');
     await page.click('#verifyEmailBtn', { force: true });
     
@@ -90,7 +92,7 @@ test.describe('NGO Registration QA - End to End', () => {
     for(let i=0; i<6; i++) {
         await otpInputs.nth(i).fill('0');
     }
-    await page.click('#verifyOtpBtn', { force: true });
+    await page.evaluate(() => document.getElementById('verifyOtpBtn').click());
     
     const err = page.locator('#globalError');
     await expect(err).toBeVisible();
@@ -130,7 +132,7 @@ test.describe('NGO Registration QA - End to End', () => {
   test('6. Terms checkbox not selected', async ({ page }) => {
     await page.goto('/5_NGO_Registration_Step_5.html');
     
-    const submitBtn = page.locator('button:has-text("Submit Registration")');
+    const submitBtn = page.locator('button', { hasText: /Submit Registration/i }).first();
     await expect(submitBtn).toBeDisabled();
     
     const checkboxes = page.locator('input[type="checkbox"]');

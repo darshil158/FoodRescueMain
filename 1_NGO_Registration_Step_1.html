@@ -348,6 +348,7 @@
             const otps = document.querySelectorAll('.otp-input');
             let otpVal = '';
             otps.forEach(i => otpVal += i.value);
+            console.log('OTP VAL:', otpVal);
             if(otpVal.length < 6) return showError("Please enter all 6 digits.");
             
             const btn = document.getElementById('verifyOtpBtn');

@@ -5,13 +5,13 @@ module.exports = defineConfig({
   fullyParallel: true,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3001',
+    baseURL: 'http://localhost:3005',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
   webServer: {
-    command: 'npx serve -p 3001',
-    port: 3001,
+    command: 'npx -y serve -p 3005',
+    port: 3005,
     reuseExistingServer: true,
   },
 });

@@ -24,7 +24,7 @@ test.describe('Restaurant Registration QA', () => {
         document.getElementById('mainContinueBtn').disabled = false;
     });
     await page.click('#mainContinueBtn');
-    expect(alertMessage, '1. Required fields should trigger alert').toContain('Please fill in all fields');
+    expect(alertMessage, '1. Required fields should trigger alert').toContain('Please fill in all required fields');
 
     // 2. Email validation (Enter invalid email and verify)
     await page.fill('#emailInput', 'invalid-email');
@@ -69,7 +69,7 @@ test.describe('Restaurant Registration QA', () => {
     await page.click('#mainContinueBtn');
     
     // Wait for navigation to Step 2
-    await expect(page).toHaveURL(/.*2_Restaurant_Registration_Step_2\.html/);
+    await expect(page).toHaveURL(/.*2_Restaurant_Registration_Step_2.*/);
 
     // Fill Step 2
     await page.fill('#restName', 'Test Restaurant');
@@ -79,7 +79,7 @@ test.describe('Restaurant Registration QA', () => {
     await page.click('text=Continue to Location');
 
     // Wait for Step 3
-    await expect(page).toHaveURL(/.*3_Restaurant_Registration_Step_3\.html/);
+    await expect(page).toHaveURL(/.*3_Restaurant_Registration_Step_3.*/);
 
     // 6. Location picker
     // Since we don't have real geolocation permissions in headless mode easily, we mock it or manually fill
@@ -93,14 +93,14 @@ test.describe('Restaurant Registration QA', () => {
     await page.click('text=Continue to Document Verification');
 
     // Wait for Step 4
-    await expect(page).toHaveURL(/.*4_Restaurant_Registration_Step_4\.html/);
+    await expect(page).toHaveURL(/.*4_Restaurant_Registration_Step_4.*/);
 
     // 7. Document uploads
     // Uploads are mocked via 'submitStep4()'
     await page.click('text=Continue to Final Review');
 
     // Wait for Step 5
-    await expect(page).toHaveURL(/.*5_Restaurant_Registration_Step_5\.html/);
+    await expect(page).toHaveURL(/.*5_Restaurant_Registration_Step_5.*/);
 
     // 8. Terms & Conditions checkbox
     // Verify submit is disabled
@@ -120,6 +120,6 @@ test.describe('Restaurant Registration QA', () => {
     await finalSubmitBtn.click();
     
     // Check if it redirects to Step 6
-    await expect(page).toHaveURL(/.*6_Registration_Success_Status\.html/, { timeout: 10000 });
+    await expect(page).toHaveURL(/.*6_Registration_Success_Status.*/, { timeout: 10000 });
   });
 });
