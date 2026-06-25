@@ -207,10 +207,14 @@
 <img class="w-full h-full object-cover opacity-80" data-alt="A professional, clean map interface showing a modern city grid with a prominent green circular pin at the center. The map style is minimalist and high-contrast, utilizing a professional color palette of soft greys and deep greens. Subtle UI overlays show nearby food rescue hubs in the neighborhood, maintaining a premium FoodTech aesthetic with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjTZLM5m2qwh3B8KTBcP-5SoZb_UDmvrpgESpPB7F_l_VPuMnvEu5v44PCUxH70_hi0SVexhrmtTZ12sOBscqsn86FvxK88yhglcndxrzdQBvXTEhCTmzNiBL-YzgR9l10Hc-7Dd4PtPlDfEg7OQUq3Sxf3P0GihzVJuPsurPdzruaTTokvpuDJ4zUshM24wH29GU74_2EFZqm41529IN2bJ9wU0ID1nEkaN30xlAUcpLYUkhhflrqEOgtRqDaxvIXNAkyWGhx72k"/>
 </div>
 <!-- Map Controls -->
-<div class="absolute top-4 left-4 z-10">
-<button class="bg-surface px-4 py-2 rounded-full font-label-md text-label-md text-primary flex items-center gap-2 shadow-md hover:bg-surface-container-high transition-colors">
+<div class="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
+<button type="button" onclick="useCurrentLocation()" class="bg-surface px-4 py-2 rounded-full font-label-md text-label-md text-primary flex items-center gap-2 shadow-md hover:bg-surface-container-high transition-colors">
 <span class="material-symbols-outlined text-[18px]">my_location</span>
                             Use Current Location
+                        </button>
+<button type="button" onclick="document.getElementById('addr1').focus()" class="bg-surface px-4 py-2 rounded-full font-label-md text-label-md text-primary flex items-center gap-2 shadow-md hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit_location_alt</span>
+                            Enter Manually
                         </button>
 </div>
 <!-- Map Legend/Overlay -->
@@ -340,15 +344,53 @@
             btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
         });
 
+        function useCurrentLocation() {
+            // Mocking geolocation for demonstration
+            const btn = document.querySelector('button[onclick="useCurrentLocation()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Locating...';
+            
+            setTimeout(() => {
+                document.getElementById('addr1').value = "123 Sustainability Way";
+                document.getElementById('addr2').value = "Green District";
+                document.getElementById('city').value = "Eco City";
+                document.getElementById('state').value = "California";
+                document.getElementById('pincode').value = "90210";
+                btn.innerHTML = originalText;
+            }, 1000);
+        }
+
         function submitStep3() {
+            const addr1 = document.getElementById('addr1').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const state = document.getElementById('state').value.trim();
+            const pincode = document.getElementById('pincode').value.trim();
+            const phone = document.getElementById('emergencyPhone').value.trim();
+
+            // Clear previous errors
+            ['addr1', 'city', 'state', 'pincode', 'emergencyPhone'].forEach(id => {
+                document.getElementById(id).classList.remove('border-error', 'ring-1', 'ring-error');
+            });
+
+            if (!addr1 || !city || !state || !pincode || !phone) {
+                alert("Please enter the address and contact details correctly because it's important for food rescues.");
+                ['addr1', 'city', 'state', 'pincode', 'emergencyPhone'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el.value.trim()) {
+                        el.classList.add('border-error', 'ring-1', 'ring-error');
+                    }
+                });
+                return;
+            }
+
             let regData = JSON.parse(localStorage.getItem('restaurant_reg_data') || '{}');
             
-            regData.addressLine1 = document.getElementById('addr1').value;
-            regData.addressLine2 = document.getElementById('addr2').value;
-            regData.city = document.getElementById('city').value;
-            regData.state = document.getElementById('state').value;
-            regData.pincode = document.getElementById('pincode').value;
-            regData.emergencyPhone = document.getElementById('emergencyPhone').value;
+            regData.addressLine1 = addr1;
+            regData.addressLine2 = document.getElementById('addr2').value.trim();
+            regData.city = city;
+            regData.state = state;
+            regData.pincode = pincode;
+            regData.emergencyPhone = phone;
             
             const freqElement = document.querySelector('input[name="freq"]:checked');
             regData.pickupFrequency = freqElement ? freqElement.value : '';

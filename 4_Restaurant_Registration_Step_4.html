@@ -149,12 +149,12 @@
 </div>
 <div class="text-right">
 <span class="text-on-surface-variant font-label-md text-label-md">Documents Uploaded</span>
-<p class="text-headline-md font-headline-md text-primary">1 / 3</p>
+<p class="text-headline-md font-headline-md text-primary">1 / 4</p>
 </div>
 </div>
 <!-- Global Progress Bar -->
 <div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary progress-bar-animate" style="width: 33.33%"></div>
+<div class="h-full bg-primary progress-bar-animate" style="width: 25%"></div>
 </div>
 </div>
 <!-- Verification Canvas -->
@@ -189,37 +189,62 @@
 </div>
 </div>
 </div>
-<!-- 2. FSSAI Certificate (IN PROGRESS STATE) -->
-<div class="bg-surface-container-lowest rounded-xl p-md border-2 border-dashed border-primary upload-card-shadow">
-<div class="flex items-start justify-between mb-sm">
+<!-- 2. FSSAI Certificate (PENDING STATE) -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant upload-card-shadow group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-start justify-between">
 <div class="flex items-center gap-base">
-<div class="bg-secondary-container/20 p-2 rounded-lg text-secondary">
+<div class="bg-surface-container-highest p-2 rounded-lg text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors">
 <span class="material-symbols-outlined">verified_user</span>
 </div>
 <div>
-<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">FSSAI Certificate</h3>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">FSSAI Certificate <span class="font-bold text-error text-label-sm ml-1">*</span></h3>
 <p class="font-body-md text-label-md text-on-surface-variant">Valid Food Safety License (PDF or JPG)</p>
 </div>
 </div>
-<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm font-bold animate-pulse">
-                        Uploading...
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-bold">
+                        Pending
                     </span>
 </div>
-<!-- Progress State -->
-<div class="mt-base bg-surface-container-low p-sm rounded-lg border border-outline-variant">
-<div class="flex justify-between items-center mb-xs">
-<span class="font-label-md text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">description</span>
-                            fssai_license_2023.pdf
-                        </span>
-<span class="text-primary font-bold font-label-md">75%</span>
-</div>
-<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary progress-bar-animate" style="width: 75%"></div>
+<div class="grid grid-cols-2 gap-sm mt-md">
+<button class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl hover:bg-primary/5 transition-colors group/btn">
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]">upload_file</span>
+<span class="font-label-md text-on-surface">Choose File</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl hover:bg-primary/5 transition-colors group/btn">
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]">photo_camera</span>
+<span class="font-label-md text-on-surface">Take Photo</span>
+</button>
 </div>
 </div>
+<!-- 3. Profile Photo (PENDING STATE) -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant upload-card-shadow group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-base">
+<div class="bg-surface-container-highest p-2 rounded-lg text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
 </div>
-<!-- 3. Business Proof (PENDING STATE) -->
+<div>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Profile Photo</h3>
+<p class="font-body-md text-label-md text-on-surface-variant">Clear photo for your public profile</p>
+</div>
+</div>
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-bold">
+                        Pending
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-sm mt-md">
+<button class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl hover:bg-primary/5 transition-colors group/btn">
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]">upload_file</span>
+<span class="font-label-md text-on-surface">Choose File</span>
+</button>
+<button class="flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl hover:bg-primary/5 transition-colors group/btn">
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]">photo_camera</span>
+<span class="font-label-md text-on-surface">Take Photo</span>
+</button>
+</div>
+</div>
+
+<!-- 4. Business Proof (PENDING STATE) -->
 <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant upload-card-shadow group hover:border-primary transition-colors cursor-pointer">
 <div class="flex items-start justify-between">
 <div class="flex items-center gap-base">
@@ -227,7 +252,7 @@
 <span class="material-symbols-outlined">business_center</span>
 </div>
 <div>
-<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Business Proof</h3>
+<h3 class="font-headline-md text-body-lg font-semibold text-on-surface">Business Proof <span class="font-normal text-on-surface-variant text-label-sm ml-2">(Optional)</span></h3>
 <p class="font-body-md text-label-md text-on-surface-variant">GST Registration or Trade License</p>
 </div>
 </div>
@@ -295,6 +320,7 @@
             // Mocking uploaded document URLs
             regData.restaurantFrontPhotoUrl = 'mock_url_front_photo.jpg';
             regData.fssaiCertificateUrl = 'mock_url_fssai.pdf';
+            regData.profilePhotoUrl = 'mock_url_profile_photo.jpg';
             regData.businessProofUrl = 'mock_url_business_proof.pdf';
             
             localStorage.setItem('restaurant_reg_data', JSON.stringify(regData));

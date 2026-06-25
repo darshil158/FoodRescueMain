@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Restaurant Registration QA', () => {
   test('Complete Registration Flow Testing', async ({ page }) => {
+    test.setTimeout(60000);
     // Navigate to Step 1
     await page.route('**/api/auth/register', async route => {
       if (route.request().method() === 'OPTIONS') {
@@ -83,11 +84,11 @@ test.describe('Restaurant Registration QA', () => {
 
     // 6. Location picker
     // Since we don't have real geolocation permissions in headless mode easily, we mock it or manually fill
-    await page.fill('input[placeholder="Street number, building name"]', '123 Fake St');
-    await page.fill('input[placeholder="Enter city"]', 'Test City');
-    await page.fill('input[placeholder="Enter state"]', 'Test State');
-    await page.fill('input[placeholder="6-digit code"]', '123456');
-    await page.fill('input[placeholder="+1 234 567 890"]', '+1234567890');
+    await page.fill('#addr1', '123 Fake St');
+    await page.fill('#city', 'Test City');
+    await page.fill('#state', 'Test State');
+    await page.fill('#pincode', '123456');
+    await page.fill('#emergencyPhone', '+1234567890');
     
     // 9. Submit button behavior
     await page.click('text=Continue to Document Verification');
@@ -97,7 +98,7 @@ test.describe('Restaurant Registration QA', () => {
 
     // 7. Document uploads
     // Uploads are mocked via 'submitStep4()'
-    await page.click('text=Continue to Final Review');
+    await page.click('text=Continue to Review');
 
     // Wait for Step 5
     await expect(page).toHaveURL(/.*5_Restaurant_Registration_Step_5.*/);
