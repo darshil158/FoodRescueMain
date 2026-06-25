@@ -46,6 +46,9 @@
     'impact analytics':         '13_impact_analytics.html',
     'chat':                     '14_chat_and_coordination.html',
     'help':                     '20_help_and_support.html',
+    'contact':                  '20_help_and_support.html',
+    'contact us':               '20_help_and_support.html',
+    'support':                  '20_help_and_support.html',
     'settings':                 '12_profile.html',
 
     // Admin links
