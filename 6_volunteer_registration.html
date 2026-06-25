@@ -284,6 +284,23 @@
 </div>
 </div>
 </div>
+<!-- Security Section -->
+<div class="bg-surface-container-lowest rounded-xl p-gutter shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<div class="flex items-center gap-2 mb-stack-md">
+<span class="material-symbols-outlined text-primary">lock</span>
+<h3 class="font-title-lg text-title-lg">Security Details</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-unit">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Password</label>
+<input class="bg-[#F3F4F6] border-0 border-b border-outline rounded-t-lg p-stack-md focus:ring-0 focus:border-primary transition-all duration-200" placeholder="••••••••" type="password" id="vol-password" required/>
+</div>
+<div class="flex flex-col gap-unit">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Confirm Password</label>
+<input class="bg-[#F3F4F6] border-0 border-b border-outline rounded-t-lg p-stack-md focus:ring-0 focus:border-primary transition-all duration-200" placeholder="••••••••" type="password" id="vol-confirm-password" required/>
+</div>
+</div>
+</div>
 <!-- Impact Visual (Atmospheric) -->
 <div class="relative w-full h-48 rounded-xl overflow-hidden group">
 <img class="w-full h-full object-cover brightness-75 transition-transform duration-700 group-hover:scale-105" data-alt="A heartening cinematic shot of diverse community volunteers working together in a vibrant sun-drenched urban garden. The lighting is warm and golden, reflecting an emerald green and soft white color palette. People are smiling while handling fresh organic produce in a lush modern setting. The atmosphere is optimistic and professional, embodying the core values of a high-trust humanitarian food rescue organization." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPX_ZC-eRk0_0j0iev-fTWmEPQB1SKjyhBG2ynFrM7lWWsxmIIW4vaFWWiU0mrBmx-fWFQmZA3vMDjpnmJL0XwHuN9A-meEyCRxgD4klgHta69xSfq96lHltdsx0fMC5bc5_4PZXsth-8gW4r_vpkbyPpimA2kccrvK4H5N_nNT7pTHVH_Eh7_g9POqae9UO4t79BgLdVBmIyGbuKnb2iVuOAS8zDr17HiwLUalXjl-SKpe6MvL7gt8-9Ic4icz25Jd6aKGRGcH4I"/>
@@ -380,14 +397,29 @@
         const submitBtn = document.getElementById('mainContinueBtn');
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            
+            const nameEl = document.getElementById('vol-name');
+            const emailEl = document.getElementById('vol-email');
+            const phoneEl = document.getElementById('vol-phone');
+            const pwEl = document.getElementById('vol-password');
+            const pwConfirmEl = document.getElementById('vol-confirm-password');
+
+            if (!nameEl.value || !emailEl.value || !phoneEl.value || !pwEl.value || !pwConfirmEl.value) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            if (pwEl.value !== pwConfirmEl.value) {
+                alert("Passwords do not match.");
+                return;
+            }
+
             submitBtn.innerHTML = 'Processing...';
             submitBtn.disabled = true;
             try {
-              const emailEl = document.getElementById('vol-email');
-              const pwEl = document.getElementById('vol-password');
               const response = await ApiClient.post('/auth/register', {
-                email: emailEl ? emailEl.value : '',
-                password: pwEl ? pwEl.value : 'password123',
+                email: emailEl.value,
+                password: pwEl.value,
                 role: 'volunteer',
                 deviceId: navigator.userAgent
               });

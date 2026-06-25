@@ -396,8 +396,11 @@
             const confirmPwd = document.getElementById('confirmPwd').value;
             const ngoName = document.getElementById('ngoName').value;
             const contactName = document.getElementById('contactName').value;
+            const ngoRegNum = document.getElementById('ngoRegNum').value;
+            const contactDesignation = document.getElementById('contactDesignation').value;
+            const mobile = document.getElementById('mobile').value;
             
-            if (!ngoName || !email || !password) {
+            if (!ngoName || !email || !password || !confirmPwd || !contactName || !ngoRegNum || !contactDesignation || !mobile) {
                 return showError("Please fill in all required fields.");
             }
             if (password !== confirmPwd) {
