@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: volunteer-qa.spec.js >> Volunteer Registration QA >> Complete Registration Flow
-- Location: tests\volunteer-qa.spec.js:12:3
+- Name: volunteer-qa.spec.js >> Volunteer Registration QA >> Missing Required Fields
+- Location: tests\volunteer-qa.spec.js:41:3
 
 # Error details
 
@@ -16,7 +16,7 @@ Test timeout of 30000ms exceeded.
 ```
 
 ```
-Error: page.click: Test timeout of 30000ms exceeded.
+Error: locator.click: Test timeout of 30000ms exceeded.
 Call log:
   - waiting for locator('button:has-text("Submit For Verification")')
     - locator resolved to <button disabled id="mainContinueBtn" class="w-full md:w-auto bg-primary text-on-primary font-label-lg text-label-lg px-gutter py-stack-md rounded-full hover:bg-primary-container hover:text-on-primary-container active:scale-95 transition-all duration-200 shadow-lg opacity-50 cursor-not-allowed">↵                Submit For Verification↵        …</button>
@@ -29,7 +29,7 @@ Call log:
       - element is not enabled
     - retrying click action
       - waiting 100ms
-    50 × waiting for element to be visible, enabled and stable
+    51 × waiting for element to be visible, enabled and stable
        - element is not enabled
      - retrying click action
        - waiting 500ms
@@ -39,7 +39,7 @@ Call log:
 # Page snapshot
 
 ```yaml
-- generic [ref=e1]:
+- generic [active] [ref=e1]:
   - banner [ref=e2]:
     - generic [ref=e3]:
       - generic [ref=e4]:
@@ -60,14 +60,14 @@ Call log:
         - generic [ref=e20]:
           - generic [ref=e21]:
             - generic [ref=e22]: Full Name
-            - textbox "Enter your full name" [ref=e23]: Test Volunteer
+            - textbox "Enter your full name" [ref=e23]
           - generic [ref=e24]:
             - generic [ref=e25]: Mobile Number
-            - textbox "+1 (555) 000-0000" [ref=e26]: "+1234567890"
+            - textbox "+1 (555) 000-0000" [ref=e26]
           - generic [ref=e27]:
             - generic [ref=e28]: Email Address
             - generic [ref=e29]:
-              - textbox "email@example.com" [active] [ref=e30]: volunteer@example.com
+              - textbox "email@example.com" [ref=e30]
               - button "Verify Email" [ref=e31] [cursor=pointer]
       - generic [ref=e32]:
         - generic [ref=e33]:
@@ -77,10 +77,10 @@ Call log:
           - generic [ref=e37]: Vehicle Type
           - generic [ref=e38]:
             - combobox [ref=e39]:
-              - option "Select your primary transport" [disabled]
+              - option "Select your primary transport" [disabled] [selected]
               - option "Bike"
               - option "Bicycle"
-              - option "Car" [selected]
+              - option "Car"
               - option "Walking"
             - generic: expand_more
       - generic [ref=e40]:
@@ -201,8 +201,7 @@ Call log:
   28 |     await page.selectOption('select', 'car');
   29 | 
   30 |     // Check location
-> 31 |     await page.click('button:has-text("Submit For Verification")');
-     |                ^ Error: page.click: Test timeout of 30000ms exceeded.
+  31 |     await page.click('button:has-text("Submit For Verification")');
   32 | 
   33 |     // Intercept alert if registration fails
   34 |     page.on('dialog', dialog => dialog.accept());
@@ -217,7 +216,8 @@ Call log:
   43 |     
   44 |     // HTML5 Validation kicks in because of 'required' attributes on #vol-name and #vol-email
   45 |     const submitBtn = page.locator('button:has-text("Submit For Verification")');
-  46 |     await submitBtn.click();
+> 46 |     await submitBtn.click();
+     |                     ^ Error: locator.click: Test timeout of 30000ms exceeded.
   47 |     
   48 |     // Validate that it did NOT say "Processing..."
   49 |     await expect(submitBtn).toHaveText('Submit For Verification');

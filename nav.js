@@ -181,7 +181,7 @@
     const currentFile = location.pathname.split('/').pop();
 
     document.addEventListener('click', function (e) {
-      const el = e.target.closest('button, a, [onclick]');
+      const el = e.target.closest('button, a, [onclick], header span, .cursor-pointer');
       if (!el) return;
 
       const text = (el.textContent || el.innerText || el.getAttribute('data-icon') || '').trim();

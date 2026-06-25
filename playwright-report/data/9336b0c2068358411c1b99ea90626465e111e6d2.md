@@ -22,14 +22,50 @@ Error: element(s) not found
 Call log:
   - Expect "toHaveClass" with timeout 5000ms
   - waiting for locator('button:has-text("NGOs")').first()
-    - waiting for" http://localhost:3001/5_ngo_registration.html" navigation to finish...
-    - navigated to "http://localhost:3001/5_ngo_registration.html"
+    4 × locator resolved to <button class="pb-stack-sm font-label-lg text-label-lg whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors">NGOs</button>
+      - unexpected value "pb-stack-sm font-label-lg text-label-lg whitespace-nowrap text-on-surface-variant hover:text-primary transition-colors"
 
 ```
 
 ```yaml
-- heading "File not found" [level=1]
-- paragraph: The file "c:\Users\mahen\Downloads\FoodRescue\5_ngo_registration.html" cannot be found. It may have been moved, edited, or deleted.
+- banner:
+  - button "arrow_back"
+  - heading "Food Rescue Hero" [level=1]
+  - text: Registration Help Contact
+- main:
+  - text: Step 1 of 5 Account Creation
+  - heading "Organization Details" [level=2]
+  - paragraph: Let's start by creating your official NGO profile.
+  - text: NGO Name
+  - textbox "e.g. Harvest Relief Foundation"
+  - text: NGO Registration Number
+  - textbox "Official Reg No."
+  - text: Organization Email
+  - textbox "verify@ngo.org"
+  - button "Verify Email"
+  - heading "Contact Person" [level=3]
+  - text: Full Name
+  - textbox "John Doe"
+  - text: Designation
+  - textbox "e.g. Director"
+  - text: Mobile Number +1
+  - textbox "123 456 7890"
+  - heading "Set Password" [level=3]
+  - text: Password
+  - textbox "••••••••"
+  - text: visibility_off Confirm Password
+  - textbox "••••••••"
+  - button "Continue arrow_forward" [disabled]
+  - button "Save Draft"
+- navigation:
+  - link "assignment_ind Registration":
+    - /url: "#"
+  - link "help_outline Help":
+    - /url: "#"
+  - link "support_agent Contact":
+    - /url: "#"
+- button "arrow_back"
+- button "home"
 ```
 
 # Test source

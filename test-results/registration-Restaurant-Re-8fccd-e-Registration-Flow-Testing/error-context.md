@@ -12,14 +12,12 @@
 # Error details
 
 ```
-Test timeout of 30000ms exceeded.
-```
+Error: 1. Required fields should trigger alert
 
-```
-Error: page.selectOption: Test timeout of 30000ms exceeded.
-Call log:
-  - waiting for locator('#cuisineType')
+expect(received).toContain(expected) // indexOf
 
+Expected substring: "Please fill in all fields"
+Received string:    "Please fill in all required fields."
 ```
 
 # Page snapshot
@@ -28,120 +26,61 @@ Call log:
 - generic [ref=e1]:
   - banner [ref=e2]:
     - generic [ref=e3]:
-      - button "arrow_back" [ref=e4] [cursor=pointer]:
-        - generic [ref=e5]: arrow_back
-      - heading "Food Rescue Hero" [level=1] [ref=e6]
-    - generic [ref=e8]:
-      - text: Already a hero?
-      - link "Login" [ref=e9] [cursor=pointer]:
-        - /url: "#"
-  - main [ref=e10]:
+      - button "arrow_back" [ref=e4] [cursor=pointer]
+      - heading "Food Rescue Hero" [level=1] [ref=e5]
+    - button "Need help? contact_support" [ref=e6] [cursor=pointer]:
+      - generic [ref=e7]: Need help?
+      - generic [ref=e8]: contact_support
+  - main [ref=e9]:
     - generic [ref=e11]:
-      - generic [ref=e12]:
-        - 'heading "Step 2: Restaurant Details" [level=2] [ref=e13]'
-        - generic [ref=e14]: Step 2 of 5
+      - paragraph [ref=e12]: Step 1 of 5
+      - paragraph [ref=e13]: Account Creation
+    - generic [ref=e16]:
       - generic [ref=e17]:
-        - generic [ref=e18]: Account
-        - generic [ref=e19]: Details
-        - generic [ref=e20]: Location
-        - generic [ref=e21]: Documents
-        - generic [ref=e22]: Review
-    - generic [ref=e23]:
-      - generic [ref=e24]:
-        - generic [ref=e25]:
-          - generic [ref=e27]: restaurant
-          - heading "Identity & Establishment" [level=3] [ref=e28]
+        - generic [ref=e18]:
+          - heading "Basic Information" [level=2] [ref=e19]
+          - generic [ref=e20]:
+            - generic [ref=e21]:
+              - generic [ref=e22]: Restaurant Owner Full Name
+              - textbox "John Doe" [ref=e23]
+            - generic [ref=e24]:
+              - generic [ref=e25]: Restaurant Email
+              - generic [ref=e26]:
+                - textbox "owner@restaurant.com" [ref=e27]
+                - button "Verify Email" [ref=e28] [cursor=pointer]
         - generic [ref=e29]:
-          - generic [ref=e30]:
-            - generic [ref=e31]: Restaurant Name
-            - textbox "e.g. The Green Kitchen" [active] [ref=e32]: Test Restaurant
-          - generic [ref=e33]:
-            - generic [ref=e34]: Restaurant Type
-            - combobox [ref=e35]:
-              - option "Select Type" [disabled] [selected]
-              - option "Fine Dining Restaurant"
-              - option "Cafe / Bistro"
-              - option "Hotel / Resort"
-              - option "Bakery / Confectionery"
-              - option "Cloud Kitchen"
-              - option "Catering Service"
-          - generic [ref=e36]:
-            - generic [ref=e37]:
-              - generic [ref=e38]: FSSAI License Number
-              - generic [ref=e39]: Required
-            - textbox "14-digit FSSAI Number" [ref=e40]
-          - generic [ref=e41]:
-            - generic [ref=e42]:
-              - generic [ref=e43]: GST Number
-              - generic [ref=e44]: Optional
-            - textbox "e.g. 22AAAAA0000A1Z5" [ref=e45]
-        - generic [ref=e46]:
-          - generic [ref=e47]:
-            - generic [ref=e48]: Years in Business
-            - spinbutton [ref=e49]
-          - generic [ref=e50]:
-            - generic [ref=e51]: Avg Daily Customers
-            - spinbutton [ref=e52]
-        - generic [ref=e53]:
-          - generic [ref=e54]: Establishment Description
-          - textbox "Briefly describe your specialty and focus..." [ref=e55]
-      - generic [ref=e56]:
-        - generic [ref=e57]:
-          - generic [ref=e59]: volunteer_activism
-          - heading "Food Donation Potential" [level=3] [ref=e60]
-        - generic [ref=e61]:
-          - generic [ref=e62]: Avg. Daily Surplus Meals (Estimated)
-          - generic [ref=e63]:
-            - generic [ref=e64] [cursor=pointer]:
-              - radio "1 - 10 meals" [ref=e65]
-              - generic [ref=e66]: 1 - 10 meals
-            - generic [ref=e67] [cursor=pointer]:
-              - radio "10 - 25 meals" [ref=e68]
-              - generic [ref=e69]: 10 - 25 meals
-            - generic [ref=e70] [cursor=pointer]:
-              - radio "25 - 50 meals" [ref=e71]
-              - generic [ref=e72]: 25 - 50 meals
-            - generic [ref=e73] [cursor=pointer]:
-              - radio "50+ meals" [ref=e74]
-              - generic [ref=e75]: 50+ meals
-        - generic [ref=e76]:
-          - generic [ref=e77]: Food Types Regularly Available (Select all that apply)
-          - generic [ref=e78]:
-            - generic [ref=e79] [cursor=pointer]:
-              - checkbox "eco Vegetarian" [ref=e80]
-              - generic [ref=e81]:
-                - generic [ref=e82]: eco
-                - text: Vegetarian
-            - generic [ref=e83] [cursor=pointer]:
-              - checkbox "restaurant_menu Non-Veg" [ref=e84]
-              - generic [ref=e85]:
-                - generic [ref=e86]: restaurant_menu
-                - text: Non-Veg
-            - generic [ref=e87] [cursor=pointer]:
-              - checkbox "bakery_dining Bakery Items" [ref=e88]
-              - generic [ref=e89]:
-                - generic [ref=e90]: bakery_dining
-                - text: Bakery Items
-            - generic [ref=e91] [cursor=pointer]:
-              - checkbox "lunch_dining Fast Food" [ref=e92]
-              - generic [ref=e93]:
-                - generic [ref=e94]: lunch_dining
-                - text: Fast Food
-            - generic [ref=e95] [cursor=pointer]:
-              - checkbox "local_drink Beverages" [ref=e96]
-              - generic [ref=e97]:
-                - generic [ref=e98]: local_drink
-                - text: Beverages
-            - generic [ref=e99] [cursor=pointer]:
-              - checkbox "inventory_2 Packaged Snacks" [ref=e100]
-              - generic [ref=e101]:
-                - generic [ref=e102]: inventory_2
-                - text: Packaged Snacks
-      - generic [ref=e103]:
-        - button "Back" [ref=e104] [cursor=pointer]
-        - button "Continue to Location arrow_forward" [ref=e105] [cursor=pointer]:
-          - text: Continue to Location
-          - generic [ref=e106]: arrow_forward
+          - heading "Security" [level=2] [ref=e30]
+          - generic [ref=e31]:
+            - generic [ref=e32]:
+              - generic [ref=e33]: Password
+              - generic [ref=e34]:
+                - textbox "••••••••" [ref=e35]
+                - generic [ref=e36] [cursor=pointer]: visibility
+              - paragraph [ref=e43]: Enter a strong password
+            - generic [ref=e44]:
+              - generic [ref=e45]: Confirm Password
+              - generic [ref=e46]:
+                - textbox "••••••••" [ref=e47]
+                - generic [ref=e48] [cursor=pointer]: visibility
+        - button "Continue to Restaurant Details" [active] [ref=e49]
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - heading "Why Join Us?" [level=3] [ref=e52]
+          - list [ref=e53]:
+            - listitem [ref=e54]:
+              - generic [ref=e55]: compost
+              - text: Reduce food waste footprint.
+            - listitem [ref=e56]:
+              - generic [ref=e57]: volunteer_activism
+              - text: Support local community food banks.
+            - listitem [ref=e58]:
+              - generic [ref=e59]: receipt_long
+              - text: Get automated tax deduction logs.
+        - paragraph [ref=e63]: Join 500+ restaurants making a difference today.
+  - button "arrow_back" [ref=e64] [cursor=pointer]:
+    - generic [ref=e65]: arrow_back
+  - button "home" [ref=e66] [cursor=pointer]:
+    - generic [ref=e67]: home
 ```
 
 # Test source
@@ -173,7 +112,8 @@ Call log:
   24  |         document.getElementById('mainContinueBtn').disabled = false;
   25  |     });
   26  |     await page.click('#mainContinueBtn');
-  27  |     expect(alertMessage, '1. Required fields should trigger alert').toContain('Please fill in all fields');
+> 27  |     expect(alertMessage, '1. Required fields should trigger alert').toContain('Please fill in all fields');
+      |                                                                     ^ Error: 1. Required fields should trigger alert
   28  | 
   29  |     // 2. Email validation (Enter invalid email and verify)
   30  |     await page.fill('#emailInput', 'invalid-email');
@@ -222,10 +162,9 @@ Call log:
   73  | 
   74  |     // Fill Step 2
   75  |     await page.fill('#restName', 'Test Restaurant');
-> 76  |     await page.selectOption('#cuisineType', 'Italian');
-      |                ^ Error: page.selectOption: Test timeout of 30000ms exceeded.
-  77  |     await page.fill('#fssaiNumber', '12345678901234');
-  78  |     await page.fill('#gstin', '22AAAAA0000A1Z5');
+  76  |     await page.selectOption('#restType', 'Cafe / Bistro');
+  77  |     await page.fill('#restFSSAI', '12345678901234');
+  78  |     await page.fill('#restGST', '22AAAAA0000A1Z5');
   79  |     await page.click('text=Continue to Location');
   80  | 
   81  |     // Wait for Step 3

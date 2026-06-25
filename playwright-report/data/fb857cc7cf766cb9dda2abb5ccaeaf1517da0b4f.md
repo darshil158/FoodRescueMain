@@ -6,24 +6,22 @@
 
 # Test info
 
-- Name: ngo-qa.spec.js >> NGO Registration QA - End to End >> 4. Wrong OTP behavior
-- Location: tests\ngo-qa.spec.js:68:3
+- Name: ngo-qa.spec.js >> NGO Registration QA - End to End >> 3. Invalid email format
+- Location: tests\ngo-qa.spec.js:58:3
 
 # Error details
 
 ```
 Error: expect(locator).toBeVisible() failed
 
-Locator: locator('#otpSection')
+Locator: locator('#globalError')
 Expected: visible
 Timeout: 5000ms
 Error: element(s) not found
 
 Call log:
   - Expect "toBeVisible" with timeout 5000ms
-  - waiting for locator('#otpSection')
-    4 × locator resolved to <div id="otpSection" class="hidden animate-slide-down space-y-md">…</div>
-      - unexpected value "hidden"
+  - waiting for locator('#globalError')
 
 ```
 
@@ -112,7 +110,8 @@ Call log:
   61  |     await page.click('#verifyEmailBtn', { force: true });
   62  |     
   63  |     const err = page.locator('#globalError');
-  64  |     await expect(err).toBeVisible();
+> 64  |     await expect(err).toBeVisible();
+      |                       ^ Error: expect(locator).toBeVisible() failed
   65  |     await expect(err).toContainText('Please enter a valid email address');
   66  |   });
   67  | 
@@ -135,8 +134,7 @@ Call log:
   84  |     await page.fill('#emailInput', 'test@ngo.com');
   85  |     await page.click('#verifyEmailBtn', { force: true });
   86  |     
-> 87  |     await expect(page.locator('#otpSection')).toBeVisible();
-      |                                               ^ Error: expect(locator).toBeVisible() failed
+  87  |     await expect(page.locator('#otpSection')).toBeVisible();
   88  | 
   89  |     const otpInputs = page.locator('.otp-input');
   90  |     for(let i=0; i<6; i++) {

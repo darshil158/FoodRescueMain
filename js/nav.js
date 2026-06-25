@@ -65,11 +65,9 @@ function requireAuth() {
 
 // ─── Wire splash screen ───────────────────────────────────────────────────────
 function wireSplash() {
-  // Auto-redirect after 2.5s if no interaction
-  const autoTimer = setTimeout(() => {
-    if (isLoggedIn()) goToDashboard();
-    else navigateTo(PAGES.roleSelection);
-  }, 2500);
+  // Removed auto-redirect to allow users to click manually.
+  const autoTimer = null;
+
 
   // Login button
   const loginBtn = document.querySelector('button:first-of-type, [data-action="login"]');

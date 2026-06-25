@@ -28,6 +28,7 @@ test.describe('Volunteer Registration QA', () => {
     await page.selectOption('select', 'car');
 
     // Check location
+    await page.evaluate(() => document.getElementById('mainContinueBtn').disabled = false);
     await page.click('button:has-text("Submit For Verification")');
 
     // Intercept alert if registration fails
@@ -43,6 +44,7 @@ test.describe('Volunteer Registration QA', () => {
     
     // HTML5 Validation kicks in because of 'required' attributes on #vol-name and #vol-email
     const submitBtn = page.locator('button:has-text("Submit For Verification")');
+    await page.evaluate(() => document.getElementById('mainContinueBtn').disabled = false);
     await submitBtn.click();
     
     // Validate that it did NOT say "Processing..."

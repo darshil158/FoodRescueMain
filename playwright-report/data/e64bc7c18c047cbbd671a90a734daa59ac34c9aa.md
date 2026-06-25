@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: ngo-qa.spec.js >> NGO Registration QA - End to End >> 4. Wrong OTP behavior
-- Location: tests\ngo-qa.spec.js:68:3
+- Name: ngo-qa.spec.js >> NGO Registration QA - End to End >> 1. Valid Registration Flow
+- Location: tests\ngo-qa.spec.js:5:3
 
 # Error details
 
@@ -80,7 +80,8 @@ Call log:
   29  |     
   30  |     // Verify email
   31  |     await page.click('#verifyEmailBtn', { force: true });
-  32  |     await expect(page.locator('#otpSection')).toBeVisible();
+> 32  |     await expect(page.locator('#otpSection')).toBeVisible();
+      |                                               ^ Error: expect(locator).toBeVisible() failed
   33  |     
   34  |     const otpInputs = page.locator('.otp-input');
   35  |     for(let i=0; i<6; i++) {
@@ -135,8 +136,7 @@ Call log:
   84  |     await page.fill('#emailInput', 'test@ngo.com');
   85  |     await page.click('#verifyEmailBtn', { force: true });
   86  |     
-> 87  |     await expect(page.locator('#otpSection')).toBeVisible();
-      |                                               ^ Error: expect(locator).toBeVisible() failed
+  87  |     await expect(page.locator('#otpSection')).toBeVisible();
   88  | 
   89  |     const otpInputs = page.locator('.otp-input');
   90  |     for(let i=0; i<6; i++) {
@@ -182,16 +182,4 @@ Call log:
   130 |   test('6. Terms checkbox not selected', async ({ page }) => {
   131 |     await page.goto('/5_NGO_Registration_Step_5.html');
   132 |     
-  133 |     const submitBtn = page.locator('button:has-text("Submit Registration")');
-  134 |     await expect(submitBtn).toBeDisabled();
-  135 |     
-  136 |     const checkboxes = page.locator('input[type="checkbox"]');
-  137 |     const count = await checkboxes.count();
-  138 |     for(let i = 0; i < count; i++) {
-  139 |         await checkboxes.nth(i).check();
-  140 |     }
-  141 |     await expect(submitBtn).toBeEnabled();
-  142 |   });
-  143 | });
-  144 | 
 ```
