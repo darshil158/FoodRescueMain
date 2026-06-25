@@ -364,6 +364,7 @@
                     clearInterval(interval);
                     timerEl.innerText = "Resend OTP";
                     timerEl.classList.add('text-primary', 'cursor-pointer');
+                    timerEl.onclick = sendOTP;
                 }
             }, 1000);
         }

@@ -98,6 +98,9 @@ async function sendLoginOTP(email) {
 async function sendVerifyOTP(email) {
   const otp = generateOTP();
   await storeOTP(email.toLowerCase(), otp, 'register');
+  console.log(`\n========================================`);
+  console.log(`📩 OTP GENERATED FOR ${email}: ${otp}`);
+  console.log(`========================================\n`);
   await EmailService.sendOTPVerification(email, email.split('@')[0], otp, 'register', OTP_EXPIRY_MINS);
   return { message: `Verification OTP sent to ${email}` };
 }
